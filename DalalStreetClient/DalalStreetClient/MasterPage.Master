@@ -1,0 +1,52 @@
+﻿<%@ Master Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="DalalStreetClient.MasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+	<title></title>
+	<asp:ContentPlaceHolder ID="head" runat="server">
+	</asp:ContentPlaceHolder>
+	<!--<link href="Style/StyleSheet.css" rel ="stylesheet" type="text/css"/>-->
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" runat="server" media="screen" href="/Style/StyleSheet.css" />
+	<style>
+		body, h1, h2, h3, h4, h5, h6 {
+			font-family: "Raleway", Arial, Helvetica, sans-serif
+		}
+
+		.mySlides {
+			display: none
+		}
+	</style>
+</head>
+<body>
+	<form id="form1" runat="server">
+		<div class="w3-bar w3-white w3-center w3-padding">
+			<asp:Image class="w3-image" runat="server" ImageUrl="~/Images/logo_fs.png" Width="384" Height="192" />
+			<div class="w3-margin-left w3-margin-right">
+				<hr>
+			</div>
+		</div>
+            <div id="menu" runat="server" class="w3-center w3-padding ">
+                <asp:LinkButton ID="Menu_LinkButtonAdminDashboard" runat="server" Text="Home" OnClick="Menu_Admin_Dashboard_Click" ValidationGroup="account" />
+                <asp:LinkButton ID="Menu_LinkMenuLogout" runat="server" Text="Logout" OnClick="Menu_Logout_Click" ValidationGroup="logout" />
+            </div>
+		<div class="w3-bar w3-white w3-center w3-medium">
+			<asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+			</asp:ContentPlaceHolder>
+		</div>
+
+	</form>
+	<!-- Footer -->
+	<footer class="w3-padding w3-center w3-margin-top">
+		<div class="w3-margin-left w3-margin-right">
+			<hr>
+		</div>
+		<p>COMP 313 - 006 Software Development Project 2</p>
+		<p>Developed By: Abhi, Cai, Frederico, Gagandeep, Lance, Mashud, Shyam </p>
+	</footer>
+</body>
+</html>

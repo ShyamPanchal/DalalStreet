@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2050
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalalStreetClient", "DalalStreetClient\DalalStreetClient.csproj", "{F67DADC8-CDDB-4250-A11C-5F55564CBC46}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F67DADC8-CDDB-4250-A11C-5F55564CBC46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F67DADC8-CDDB-4250-A11C-5F55564CBC46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F67DADC8-CDDB-4250-A11C-5F55564CBC46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F67DADC8-CDDB-4250-A11C-5F55564CBC46}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {61B184A3-651E-4222-BA01-F9FAA4ECA402}
+	EndGlobalSection
+EndGlobal
