@@ -16,4 +16,5 @@ namespace DalalStreetClient.Core.Models
             this.Owner = Owner;
             Players = new List<User>();
         }
+    }
 }
