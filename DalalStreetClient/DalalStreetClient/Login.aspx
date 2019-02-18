@@ -29,7 +29,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
+    <h1>Login</h1>
 	<div class="w3-bar w3-white w3-center w3-medium">
 		<p>
             <asp:CustomValidator ID="CustomValidatorValid" ValidationGroup="login" runat="server" ErrorMessage="There is no game Available!" ControlToValidate="textboxUserName" ForeColor="Red" OnServerValidate="VerifyGame" Display="Dynamic" ></asp:CustomValidator>
@@ -38,7 +38,7 @@
             </p>
 			 <hr/>
 		<p>
-			<asp:Button ID="buttonLogin" runat="server" ValidationGroup="login" OnClick="buttonEnter_Click" Text="Enter" CssClass="w3-button w3-black w3-padding w3-round" />
+			<asp:Button ID="buttonLogin" runat="server" ValidationGroup="login" OnClick="buttonEnter_Click" Text="Enter" CssClass="w3-button w3-red w3-padding w3-round" />
 
 		</p>
 

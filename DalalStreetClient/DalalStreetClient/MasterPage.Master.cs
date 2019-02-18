@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DalalStreetClient.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -54,13 +55,17 @@ namespace DalalStreetClient
                     //send the user to the first page if is a public
                     if (c.Value == "Admin")
                     {
+                        Simulation game = (Simulation)Application["Game"];
+                        if (game == null)
+                        {
+                            DoLogout();
+                        }
                         Response.Redirect("~/Pages/Dashboard/AdminDashboard.aspx");
                     }
                     else if (c.Value == "Player")
                     {
                         Response.Redirect("~/Pages/PlayerWaitingRoom.aspx");
                     }
-
                 }
                 ManageMenuVisibility(c.Value.ToString());
 
@@ -75,24 +80,62 @@ namespace DalalStreetClient
             switch (category)
             {
                 case Core.Models.User.Category.Admin:
-                    Menu_LinkButtonAdminDashboard.Visible = true;                    
+                    Menu_LinkButtonAdminDashboard.Visible = true;
+                    Menu_LinkWaitingRoom.Visible = true;
                     Menu_LinkMenuLogout.Visible = true;
                     break;
                 case Core.Models.User.Category.Player:
                     Menu_LinkButtonAdminDashboard.Visible = false;
-
+                    Menu_LinkWaitingRoom.Visible = false;
                     Menu_LinkMenuLogout.Visible = true;
                     break;
             }
 
         }
+
+        protected void Menu_Waiting_Room(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Pages/AdminWaitingRoom.aspx");
+        }
+        protected void Menu_Home(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Pages/Dashboard/AdminDashboard.aspx");
+        }
+        protected void Menu_Logout_Click(object sender, EventArgs e)
+        {
+            DoLogout();
+            Response.Redirect("~/Login.aspx");
+        }
+
         private void DoLogout()
         {
             Session.Abandon();
             if (Request.Cookies["UserID"] != null)
             {
-                Response.Cookies["UserID"].Expires = DateTime.Now.AddDays(-1);
-                Application.RemoveAll();
+                Response.Cookies["UserID"].Expires = DateTime.Now.AddDays(-1);                
+                String role = (String)Session["role"];
+                if (role != null)
+                {
+                    if (User.Category.Admin == User.ConvertCategory(role))
+                    {
+                        Application.RemoveAll();
+                    } else
+                    {
+                        Simulation game = (Simulation)Application["Game"];
+                        int index = 0;
+                        foreach (User user in game.Players)
+                        {
+                            String name = (String)Response.Cookies["UserName"].Value;
+                            if (user.Name == name)
+                            {
+                                break;
+                            }
+                            index++;
+                        }
+                        game.Players.RemoveAt(index);
+                    }
+
+                }
                 Session.RemoveAll();
             }
         }

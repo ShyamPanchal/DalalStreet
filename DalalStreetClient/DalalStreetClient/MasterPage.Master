@@ -25,14 +25,15 @@
 <body>
 	<form id="form1" runat="server">
 		<div class="w3-bar w3-white w3-center w3-padding">
-			<asp:Image class="w3-image" runat="server" ImageUrl="~/Images/logo_fs.png" Width="384" Height="192" />
+			<asp:Image class="w3-image" runat="server" ImageUrl="~/Images/buy-sell-thinkstock.jpg" Width="384" Height="192" />
 			<div class="w3-margin-left w3-margin-right">
 				<hr>
 			</div>
 		</div>
             <div id="menu" runat="server" class="w3-center w3-padding ">
-                <asp:LinkButton ID="Menu_LinkButtonAdminDashboard" runat="server" Text="Home" ValidationGroup="account" />
-                <asp:LinkButton ID="Menu_LinkMenuLogout" runat="server" Text="Logout" ValidationGroup="logout" />
+                <asp:LinkButton ID="Menu_LinkButtonAdminDashboard" runat="server" Text="Home" OnClick="Menu_Home" ValidationGroup="account" />
+                <asp:LinkButton ID="Menu_LinkWaitingRoom" runat="server" Text="Waiting Room" OnClick="Menu_Waiting_Room" ValidationGroup="account" />
+                <asp:LinkButton ID="Menu_LinkMenuLogout" runat="server" Text="Logout" OnClick="Menu_Logout_Click" ValidationGroup="logout" />
             </div>
 		<div class="w3-bar w3-white w3-center w3-medium">
 			<asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

@@ -24,30 +24,30 @@ namespace DalalStreetClient
             {
                 // "Cookie Does not exists! Creating a cookie  now.";
                 string name = textboxUserName.Text;
-                User user;
+                User user = null;
                 //Do the authentication
                 if (name == "Admin")
                 {
                     user = new User(name, "192.168.1.1.", Core.Models.User.Category.Admin);
-                    if (ExistsGame())
-                    {
-                        Response.Redirect("~/Pages/Dashboard/GameDashboard.aspx");
-                    }
-                    else
+
+                    if (!ExistsGame())
                     {
                         Simulation game = new Simulation(user);
                         Application["Game"] = game;
-                        Response.Redirect("~/Pages/Dashboard/AdminDashboard.aspx");
+                        Application["Times"] = 0;
                     }
+
                 }
                 else
                 {                    
-                    if (!ExistsGame())
+                    if (ExistsGame())
                     {
-                        //redirect to Login Page showing Error
-                        Response.Redirect("~/Error.aspx");
+                        user = new User(name, "192.168.1.1.", Core.Models.User.Category.Player);
+
+                        //Adding a player to the game
+                        Simulation game = (Simulation)Application["Game"];
+                        game.Players.Add(user);
                     }
-                    user = new User(name, "192.168.1.1.", Core.Models.User.Category.Player);                    
                 }
 
                 if (user == null)
@@ -74,10 +74,6 @@ namespace DalalStreetClient
                     HttpCookie c1 = new HttpCookie("UserName", userName);
                     c1.Expires = DateTime.Now.AddMinutes(30);
                     Response.Cookies.Add(c1);
-
-                    //Adding a player to the game
-                    Simulation game = (Simulation)Application["Game"];
-                    game.Players.Add(user);
 
                     Response.Redirect("~/Login.aspx");
                 }
