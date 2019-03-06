@@ -11,3 +11,4 @@ C:\Users\Shyam\Desktop\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\obj
 C:\Users\Shyam\Desktop\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\obj\Debug\netcoreapp2.1\DalalStreetAPI.RazorTargetAssemblyInfo.cache
 C:\Users\Shyam\Desktop\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\obj\Debug\netcoreapp2.1\DalalStreetAPI.dll
 C:\Users\Shyam\Desktop\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\obj\Debug\netcoreapp2.1\DalalStreetAPI.pdb
+C:\Users\Shyam\Desktop\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\obj\Debug\netcoreapp2.1\DalalStreetAPI.csprojAssemblyReference.cache
