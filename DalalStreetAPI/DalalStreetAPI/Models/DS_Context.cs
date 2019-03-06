@@ -14,6 +14,7 @@ namespace DalalStreetAPI.Models
 
 
         public virtual DbSet<DS_Company> DS_Company { get; set; }
+        public virtual DbSet<DS_CompanyCategory> DS_CompanyCategory { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -29,6 +30,15 @@ namespace DalalStreetAPI.Models
                 entity.Property(e => e.Name).IsRequired();
 
                 entity.Property(e => e.stockValues).IsRequired();
+
+                entity.Property(e => e.CategoryId).IsRequired();
+            });
+
+            modelBuilder.Entity<DS_CompanyCategory>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.Name).IsRequired();
             });
         }
     }

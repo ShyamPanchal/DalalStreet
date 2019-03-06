@@ -2,13 +2,12 @@ C:\Users\Shyam\Desktop\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\bin
 C:\Users\Shyam\Desktop\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\bin\Debug\netcoreapp2.1\DalalStreetAPI.runtimeconfig.json
 C:\Users\Shyam\Desktop\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\bin\Debug\netcoreapp2.1\DalalStreetAPI.runtimeconfig.dev.json
 C:\Users\Shyam\Desktop\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\bin\Debug\netcoreapp2.1\DalalStreetAPI.dll
-C:\Users\Shyam\Desktop\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\obj\Debug\netcoreapp2.1\DalalStreetAPI.csprojAssemblyReference.cache
+C:\Users\Shyam\Desktop\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\bin\Debug\netcoreapp2.1\DalalStreetAPI.pdb
 C:\Users\Shyam\Desktop\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\obj\Debug\netcoreapp2.1\DalalStreetAPI.csproj.CoreCompileInputs.cache
 C:\Users\Shyam\Desktop\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\obj\Debug\netcoreapp2.1\DalalStreetAPI.RazorAssemblyInfo.cache
 C:\Users\Shyam\Desktop\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\obj\Debug\netcoreapp2.1\DalalStreetAPI.RazorAssemblyInfo.cs
 C:\Users\Shyam\Desktop\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\obj\Debug\netcoreapp2.1\DalalStreetAPI.AssemblyInfoInputs.cache
 C:\Users\Shyam\Desktop\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\obj\Debug\netcoreapp2.1\DalalStreetAPI.AssemblyInfo.cs
 C:\Users\Shyam\Desktop\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\obj\Debug\netcoreapp2.1\DalalStreetAPI.RazorTargetAssemblyInfo.cache
-C:\Users\Shyam\Desktop\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\bin\Debug\netcoreapp2.1\DalalStreetAPI.pdb
 C:\Users\Shyam\Desktop\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\obj\Debug\netcoreapp2.1\DalalStreetAPI.dll
 C:\Users\Shyam\Desktop\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\obj\Debug\netcoreapp2.1\DalalStreetAPI.pdb

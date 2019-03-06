@@ -4,90 +4,83 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using DalalStreetAPI.Models;
+using DalalStreetAPI.Services;
 
 namespace DalalStreetAPI.Controllers
 {
+    [Route("api/[controller]")]
     public class DS_CompanyController : Controller
     {
-        // GET: DS_Company
-        public ActionResult Index()
+        private readonly IDS_CompanyService _dsService;
+
+        public DS_CompanyController(IDS_CompanyService _dsService)
         {
-            return View();
+            this._dsService = _dsService;
         }
 
-        // GET: DS_Company/Details/5
-        public ActionResult Details(int id)
+        //GET: api/DS_Company
+        [HttpGet()]
+        [Route("allrecords")]
+        [ProducesResponseType(typeof(IEnumerable<DS_Company>), 200)]
+        public async Task<IEnumerable<DS_Company>> GetRecordsAsync()
         {
-            return View();
+            IEnumerable<DS_Company> records = await _dsService.GetAllAsync();
+
+            return records;
         }
 
-        // GET: DS_Company/Create
-        public ActionResult Create()
+        //GET api/DS_Company/id
+        [HttpGet("{id}", Name = nameof(GetRecordByIdAsync))]
+        [ProducesResponseType(typeof(DS_Company), 200)]
+        [ProducesResponseType(404)]
+        public async Task<IActionResult> GetRecordByIdAsync(int id)
         {
-            return View();
+            DS_Company record = await _dsService.FindAsync(id);
+            if (record == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return new ObjectResult(record);
+            }
         }
 
-        // POST: DS_Company/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        [ProducesResponseType(typeof(DS_Company), 201)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> PostRecordAsync([FromBody]DS_Company record)
         {
-            try
+            if (record == null)
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
+                return BadRequest();
             }
-            catch
-            {
-                return View();
-            }
+            await _dsService.AddAsync(record);
+            return CreatedAtRoute(nameof(GetRecordByIdAsync), new { id = record.Id }, record);
         }
 
-        // GET: DS_Company/Edit/5
-        public ActionResult Edit(int id)
+        //PUT api/DS_Company/id
+        [HttpPut("{id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public async Task<IActionResult> PutrecordAsync(int id, [FromBody]DS_Company record)
         {
-            return View();
+            if (record == null || id != record.Id)
+            {
+                return BadRequest();
+            }
+            if (await _dsService.FindAsync(id) == null)
+            {
+                return NotFound();
+            }
+            await _dsService.UpdateAsync(record);
+            return new NoContentResult();
         }
 
-        // POST: DS_Company/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: DS_Company/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: DS_Company/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //DELETE api/DS_Company/id
+        [HttpDelete("{id}")]
+        public async Task DeleteAsync(int id) => await _dsService.RemoveAsync(id);
     }
 }

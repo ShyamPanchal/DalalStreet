@@ -32,7 +32,10 @@ namespace DalalStreetAPI
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddDbContext<DS_Context>(options => options.UseSqlServer(Configuration.GetConnectionString("DS_db")));
-            services.AddScoped<IDS_Service, DS_Service>();
+
+            services.AddScoped<IDS_CompanyService, DS_CompanyService>();
+            services.AddScoped<IDS_CompanyCategoryService, DS_CompanyCategoryService>();
+
             services.AddMvc(options =>
             {
                 options.FormatterMappings.SetMediaTypeMappingForFormat("xml", "application/xml");

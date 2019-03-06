@@ -24,14 +24,42 @@ namespace DalalStreetAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CategoryId");
+
                     b.Property<string>("Name")
                         .IsRequired();
 
                     b.Property<int>("stockValues");
 
+                    b.Property<int>("totalStocks");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("DS_Company");
+                });
+
+            modelBuilder.Entity("DalalStreetAPI.Models.DS_CompanyCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DS_CompanyCategory");
+                });
+
+            modelBuilder.Entity("DalalStreetAPI.Models.DS_Company", b =>
+                {
+                    b.HasOne("DalalStreetAPI.Models.DS_CompanyCategory", "DS_CompanyCategory")
+                        .WithMany("DS_Companies")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
