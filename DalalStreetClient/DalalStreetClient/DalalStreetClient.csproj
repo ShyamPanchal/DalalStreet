@@ -84,7 +84,10 @@
     <Content Include="Pages\Dashboard\AdminDashboard.aspx" />
     <Content Include="Pages\Dashboard\GameDashboard.aspx" />
     <Content Include="Pages\Dashboard\PlayerDashboard.aspx" />
+    <Content Include="Pages\GameAdmin.aspx" />
+    <Content Include="Pages\GamePlayer.aspx" />
     <Content Include="Pages\PlayerWaitingRoom.aspx" />
+    <Content Include="Pages\ResultPage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -141,12 +144,33 @@
     <Compile Include="Pages\Dashboard\PlayerDashboard.aspx.designer.cs">
       <DependentUpon>PlayerDashboard.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\GameAdmin.aspx.cs">
+      <DependentUpon>GameAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\GameAdmin.aspx.designer.cs">
+      <DependentUpon>GameAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\GamePlayer.aspx.cs">
+      <DependentUpon>GamePlayer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\GamePlayer.aspx.designer.cs">
+      <DependentUpon>GamePlayer.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PlayerWaitingRoom.aspx.cs">
       <DependentUpon>PlayerWaitingRoom.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\PlayerWaitingRoom.aspx.designer.cs">
       <DependentUpon>PlayerWaitingRoom.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ResultPage.aspx.cs">
+      <DependentUpon>ResultPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\ResultPage.aspx.designer.cs">
+      <DependentUpon>ResultPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

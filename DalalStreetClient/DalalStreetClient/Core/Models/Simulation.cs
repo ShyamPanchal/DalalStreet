@@ -11,6 +11,8 @@ namespace DalalStreetClient.Core.Models
         public List<User> Players { get; set; }
         public Settings Setting { get; set; }
 
+        public bool Running { get; set; }
+
         public Simulation(User Owner)
         {
             this.Owner = Owner;

@@ -65,8 +65,15 @@ namespace DalalStreetClient
                     else if (c.Value == "Player")
                     {
                         Response.Redirect("~/Pages/PlayerWaitingRoom.aspx");
+                        
                     }
                 }
+
+                Menu_userName.Text = userName;
+                string ip = Session["userIP"] != null ? Session["userIP"].ToString() : "";
+                Menu_userIP.Text = ip;
+                Menu_gameTime.Text = "00:00:00";
+
                 ManageMenuVisibility(c.Value.ToString());
 
             }
@@ -83,11 +90,17 @@ namespace DalalStreetClient
                     Menu_LinkButtonAdminDashboard.Visible = true;
                     Menu_LinkWaitingRoom.Visible = true;
                     Menu_LinkMenuLogout.Visible = true;
+                    Menu_userName.Visible = false;
+                    Menu_userIP.Visible = false;
+                    Menu_gameTime.Visible = false;
                     break;
                 case Core.Models.User.Category.Player:
                     Menu_LinkButtonAdminDashboard.Visible = false;
                     Menu_LinkWaitingRoom.Visible = false;
                     Menu_LinkMenuLogout.Visible = true;
+                    Menu_userName.Visible = true;
+                    Menu_userIP.Visible = true;
+                    Menu_gameTime.Visible = true;
                     break;
             }
 
@@ -107,7 +120,7 @@ namespace DalalStreetClient
             Response.Redirect("~/Login.aspx");
         }
 
-        private void DoLogout()
+        public void DoLogout()
         {
             Session.Abandon();
             if (Request.Cookies["UserID"] != null)
@@ -122,17 +135,21 @@ namespace DalalStreetClient
                     } else
                     {
                         Simulation game = (Simulation)Application["Game"];
-                        int index = 0;
-                        foreach (User user in game.Players)
+                        if (game != null)
                         {
-                            String name = (String)Response.Cookies["UserName"].Value;
-                            if (user.Name == name)
+                            int index = 0;
+                            foreach (User user in game.Players)
                             {
-                                break;
+                                String name = (String)Response.Cookies["UserName"].Value;
+                                if (user.Name == name)
+                                {
+                                    break;
+                                }
+                                index++;
                             }
-                            index++;
+                            game.Players.RemoveAt(index);
                         }
-                        game.Players.RemoveAt(index);
+
                     }
 
                 }

@@ -10,16 +10,7 @@
 namespace DalalStreetClient.Pages {
     
     
-    public partial class AdminWaitingRoom {
-        
-        /// <summary>
-        /// tablePlayers control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tablePlayers;
+    public partial class GamePlayer {
         
         /// <summary>
         /// ScriptManager control.
@@ -40,30 +31,30 @@ namespace DalalStreetClient.Pages {
         protected global::System.Web.UI.Timer TimerToRefresh;
         
         /// <summary>
-        /// PlayerTablePanel control.
+        /// GamePanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel PlayerTablePanel;
+        protected global::System.Web.UI.UpdatePanel GamePanel;
         
         /// <summary>
-        /// PlayersTable control.
+        /// tableStocks control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table PlayersTable;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tableStocks;
         
         /// <summary>
-        /// buttonStart control.
+        /// tableNews control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button buttonStart;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tableNews;
     }
 }

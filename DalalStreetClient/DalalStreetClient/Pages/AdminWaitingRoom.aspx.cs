@@ -26,7 +26,7 @@ namespace DalalStreetClient.Pages
                 int times = (int)Application["Times"];
                 times++;
                 Application["Times"] = times;
-                Update_Times.Text = "" + times;
+                //Update_Times.Text = "" + times;
                 LoadTable();
 
             }            
@@ -66,6 +66,13 @@ namespace DalalStreetClient.Pages
                 row.Cells.Add(cell2);
                 PlayersTable.Rows.Add(row);
             }
+        }
+
+        protected void buttonStart_Click(object sender, EventArgs e)
+        {
+            Simulation game = (Simulation)Application["Game"];
+            game.Running = true;
+            Response.Redirect("~/Pages/GameAdmin.aspx");
         }
     }
 }

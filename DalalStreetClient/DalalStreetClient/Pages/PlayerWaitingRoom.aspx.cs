@@ -16,11 +16,11 @@ namespace DalalStreetClient.Pages
             {
                 //do something?
             } else
-            {
+            {               
                 int times = (int)Application["Times"];
                 times++;
                 Application["Times"] = times;
-                Update_Times.Text = "" + times;
+                //Update_Times.Text = "" + times;
                 LoadTable();
 
             }
@@ -39,6 +39,10 @@ namespace DalalStreetClient.Pages
         private void LoadTable()
         {
             Simulation game = (Simulation)Application["Game"];
+            if (game.Running)
+            {
+                Response.Redirect("~/Pages/GamePlayer.aspx");
+            }
 
             PlayersTable.Rows.Clear();
 

@@ -28,7 +28,9 @@ namespace DalalStreetClient
                 //Do the authentication
                 if (name == "Admin")
                 {
-                    user = new User(name, "192.168.1.1.", Core.Models.User.Category.Admin);
+                    string ip = Request.UserHostAddress;
+                    GetIpValue(out ip);
+                    user = new User(name, ip, Core.Models.User.Category.Admin);
 
                     if (!ExistsGame())
                     {
@@ -42,7 +44,9 @@ namespace DalalStreetClient
                 {                    
                     if (ExistsGame())
                     {
-                        user = new User(name, "192.168.1.1.", Core.Models.User.Category.Player);
+                        string ip = Request.UserHostAddress;
+                        GetIpValue(out ip);
+                        user = new User(name, ip, Core.Models.User.Category.Player);
 
                         //Adding a player to the game
                         Simulation game = (Simulation)Application["Game"];
@@ -65,7 +69,7 @@ namespace DalalStreetClient
                     HttpCookie c0 = new HttpCookie("UserCategory", "" + user.category);
 
                     Session["role"] = user.category.ToString();
-
+                    Session["userIP"] = user.IP;
                     c0.Expires = DateTime.Now.AddMinutes(30);
                     Response.Cookies.Add(c0);
 
@@ -92,6 +96,20 @@ namespace DalalStreetClient
         {
             Simulation game = (Simulation)Application["Game"];
             return game != null;
+        }
+
+        private void GetIpValue(out string ipAdd)
+        {
+            ipAdd = Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+
+            if (string.IsNullOrEmpty(ipAdd))
+            {
+                ipAdd = Request.ServerVariables["REMOTE_ADDR"];
+            }
+            else
+            {
+                //lblIPAddress.Text = ipAdd;
+            }
         }
     }
 }

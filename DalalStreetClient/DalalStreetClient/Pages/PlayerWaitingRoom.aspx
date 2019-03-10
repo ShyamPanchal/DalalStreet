@@ -17,9 +17,9 @@
                         <asp:table id="PlayersTable" runat="server" GridLines="Horizontal" HorizontalAlign="Center" Width="75%" CssClass="w3-table w3-centered w3-bordered w3-hoverable w3-text-black w3-white w3-round-large">
                    
                         </asp:table>
-                        <div>
+                        <!--div>
                             Times updated <asp:Label ID="Update_Times" runat="server"></asp:Label>
-                        </div>
+                        </div-->
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </p>
