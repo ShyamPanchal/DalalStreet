@@ -19,5 +19,7 @@ namespace DalalStreetAPI.Models
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         public DS_CompanyCategory DS_CompanyCategory { get; set; }
+
+        public List<DS_NewsEvent> DS_Companies { get; set; }
     }
 }

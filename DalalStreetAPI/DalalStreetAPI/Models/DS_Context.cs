@@ -15,6 +15,10 @@ namespace DalalStreetAPI.Models
 
         public virtual DbSet<DS_Company> DS_Company { get; set; }
         public virtual DbSet<DS_CompanyCategory> DS_CompanyCategory { get; set; }
+        public virtual DbSet<DS_NewCompanyNames> DS_NewCompanyNames { get; set; }
+        public virtual DbSet<DS_EventTypes> DS_EventTypes { get; set; }
+        public virtual DbSet<DS_NewsEvent> DS_NewsEvent { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -40,6 +44,36 @@ namespace DalalStreetAPI.Models
 
                 entity.Property(e => e.Name).IsRequired();
             });
+
+            modelBuilder.Entity<DS_NewCompanyNames>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.Name).IsRequired();
+            });
+
+            modelBuilder.Entity<DS_EventTypes>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.TypeString).IsRequired();
+
+                entity.Property(e => e.Likelihood).IsRequired();
+
+                entity.Property(e => e.EffectOnSelf).IsRequired();
+
+                entity.Property(e => e.EffectOnOthers).IsRequired();
+            });
+
+            modelBuilder.Entity<DS_NewsEvent>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.OnCompanyId).IsRequired();
+
+                entity.Property(e => e.EventTypeId).IsRequired();
+            });
+
         }
     }
 }

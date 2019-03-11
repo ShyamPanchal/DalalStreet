@@ -35,6 +35,9 @@ namespace DalalStreetAPI
 
             services.AddScoped<IDS_CompanyService, DS_CompanyService>();
             services.AddScoped<IDS_CompanyCategoryService, DS_CompanyCategoryService>();
+            services.AddScoped<IDS_NewCompanyNamesService, DS_NewCompanyNamesService>();
+            services.AddScoped<IDS_EventTypesService, DS_EventTypesService>();
+            services.AddScoped<IDS_NewsEventService, DS_NewsEventService>();
 
             services.AddMvc(options =>
             {
