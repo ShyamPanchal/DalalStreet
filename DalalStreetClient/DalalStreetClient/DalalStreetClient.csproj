@@ -86,12 +86,20 @@
     <Content Include="Pages\Dashboard\PlayerDashboard.aspx" />
     <Content Include="Pages\GameAdmin.aspx" />
     <Content Include="Pages\GamePlayer.aspx" />
+    <Content Include="Pages\GameSettings.aspx" />
     <Content Include="Pages\PlayerWaitingRoom.aspx" />
     <Content Include="Pages\ResultPage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Controllers\TestCallController.cs" />
+    <Compile Include="Core\Controllers\DalalStreetAPIController.cs" />
+    <Compile Include="Core\Models\Company.cs" />
+    <Compile Include="Core\Models\CompanyCategory.cs" />
+    <Compile Include="Core\Models\Event.cs" />
+    <Compile Include="Core\Models\EventType.cs" />
+    <Compile Include="Core\Models\SimpleString.cs" />
+    <Compile Include="Core\Services\DalalStreetAPIService.cs" />
+    <Compile Include="Core\Services\TestCallController.cs" />
     <Compile Include="Core\Models\Settings.cs" />
     <Compile Include="Core\Models\Simulation.cs" />
     <Compile Include="Core\Models\User.cs" />
@@ -157,6 +165,13 @@
     </Compile>
     <Compile Include="Pages\GamePlayer.aspx.designer.cs">
       <DependentUpon>GamePlayer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\GameSettings.aspx.cs">
+      <DependentUpon>GameSettings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\GameSettings.aspx.designer.cs">
+      <DependentUpon>GameSettings.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\PlayerWaitingRoom.aspx.cs">
       <DependentUpon>PlayerWaitingRoom.aspx</DependentUpon>

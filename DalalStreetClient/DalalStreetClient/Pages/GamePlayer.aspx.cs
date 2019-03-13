@@ -24,8 +24,17 @@ namespace DalalStreetClient.Pages
                 (this.Master as MasterPage).DoLogout();
                 //Todo redirect to an error page
                 Response.Redirect("~/Login.aspx");
-            } else if (!game.Running)
+            } else if (game.Running)
             {
+                //reforce checking
+                if (!Core.Controllers.DalalStreetAPIController.GetInstance().isGameRunning())
+                {
+                    Response.Redirect("~/Pages/ResultPage.aspx");
+                }
+
+            } else
+            {
+                //the case of admin check first
                 Response.Redirect("~/Pages/ResultPage.aspx");
             }
         }

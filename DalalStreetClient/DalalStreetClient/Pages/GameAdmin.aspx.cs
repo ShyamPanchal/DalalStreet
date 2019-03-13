@@ -15,10 +15,15 @@ namespace DalalStreetClient.Pages
 
         }
 
+        protected void Timer_Tick(object sender, EventArgs e)
+        {
+            
+        }
+
         protected void buttonStop_Click(object sender, EventArgs e)
         {
-            Simulation game = (Simulation)Application["Game"];
-            game.Running = false;
+            Simulation game = (Simulation)Application["Game"];            
+            game.Running = Core.Controllers.DalalStreetAPIController.GetInstance().StopGame();
             Response.Redirect("~/Pages/ResultPage.aspx");
         }
     }

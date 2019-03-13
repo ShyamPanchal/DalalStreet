@@ -90,6 +90,7 @@ namespace DalalStreetClient
                     Menu_LinkButtonAdminDashboard.Visible = true;
                     Menu_LinkWaitingRoom.Visible = true;
                     Menu_LinkMenuLogout.Visible = true;
+                    Menu_LinkButtonGameSettings.Visible = true;
                     Menu_userName.Visible = false;
                     Menu_userIP.Visible = false;
                     Menu_gameTime.Visible = false;
@@ -98,6 +99,7 @@ namespace DalalStreetClient
                     Menu_LinkButtonAdminDashboard.Visible = false;
                     Menu_LinkWaitingRoom.Visible = false;
                     Menu_LinkMenuLogout.Visible = true;
+                    Menu_LinkButtonGameSettings.Visible = false;
                     Menu_userName.Visible = true;
                     Menu_userIP.Visible = true;
                     Menu_gameTime.Visible = true;
@@ -106,6 +108,10 @@ namespace DalalStreetClient
 
         }
 
+        protected void Menu_Settings_Room(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Pages/GameSettings.aspx");
+        }
         protected void Menu_Waiting_Room(object sender, EventArgs e)
         {
             Response.Redirect("~/Pages/AdminWaitingRoom.aspx");

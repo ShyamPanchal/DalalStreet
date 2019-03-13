@@ -7,108 +7,108 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DalalStreetClient {
+namespace DalalStreetClient.Pages {
     
     
-    public partial class MasterPage {
+    public partial class GameSettings {
         
         /// <summary>
-        /// head control.
+        /// tablesSettings control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tablesSettings;
         
         /// <summary>
-        /// form1 control.
+        /// companyNames control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl companyNames;
         
         /// <summary>
-        /// menu control.
+        /// CompanyNameTable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl menu;
+        protected global::System.Web.UI.WebControls.Table CompanyNameTable;
         
         /// <summary>
-        /// Menu_LinkButtonAdminDashboard control.
+        /// companyCategory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton Menu_LinkButtonAdminDashboard;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl companyCategory;
         
         /// <summary>
-        /// Menu_LinkButtonGameSettings control.
+        /// CompanyCategoryTable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton Menu_LinkButtonGameSettings;
+        protected global::System.Web.UI.WebControls.Table CompanyCategoryTable;
         
         /// <summary>
-        /// Menu_LinkWaitingRoom control.
+        /// company control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton Menu_LinkWaitingRoom;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl company;
         
         /// <summary>
-        /// Menu_userName control.
+        /// CompanyTable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Menu_userName;
+        protected global::System.Web.UI.WebControls.Table CompanyTable;
         
         /// <summary>
-        /// Menu_userIP control.
+        /// eventType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Menu_userIP;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl eventType;
         
         /// <summary>
-        /// Menu_gameTime control.
+        /// EventTypeTable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Menu_gameTime;
+        protected global::System.Web.UI.WebControls.Table EventTypeTable;
         
         /// <summary>
-        /// Menu_LinkMenuLogout control.
+        /// news control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton Menu_LinkMenuLogout;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl news;
         
         /// <summary>
-        /// ContentPlaceHolder1 control.
+        /// NewsEventsTable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
+        protected global::System.Web.UI.WebControls.Table NewsEventsTable;
     }
 }

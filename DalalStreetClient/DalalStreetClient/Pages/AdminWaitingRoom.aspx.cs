@@ -70,8 +70,8 @@ namespace DalalStreetClient.Pages
 
         protected void buttonStart_Click(object sender, EventArgs e)
         {
-            Simulation game = (Simulation)Application["Game"];
-            game.Running = true;
+            Simulation game = (Simulation)Application["Game"];            
+            game.Running = Core.Controllers.DalalStreetAPIController.GetInstance().StartGame();
             Response.Redirect("~/Pages/GameAdmin.aspx");
         }
     }

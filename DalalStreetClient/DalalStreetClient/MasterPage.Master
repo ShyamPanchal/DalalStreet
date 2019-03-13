@@ -32,6 +32,7 @@
 		</div>
         <div id="menu" runat="server" class="w3-center w3-padding ">
             <asp:LinkButton ID="Menu_LinkButtonAdminDashboard" runat="server" Text="Home" OnClick="Menu_Home" ValidationGroup="account" />
+            <asp:LinkButton ID="Menu_LinkButtonGameSettings" runat="server" Text="Settings" OnClick="Menu_Settings_Room" ValidationGroup="account" />
             <asp:LinkButton ID="Menu_LinkWaitingRoom" runat="server" Text="Waiting Room" OnClick="Menu_Waiting_Room" ValidationGroup="account" />
             <asp:Label id="Menu_userName" runat="server"></asp:Label>
             <asp:Label id="Menu_userIP" runat="server"></asp:Label>
