@@ -8,7 +8,7 @@ namespace DalalStreetClient.Core.Services
 {
     public class DalalStreetAPIService
     {
-        private const string URL = "https://localhost:44364/api";
+        public static string URL = "https://localhost:44364/api";
         private string UrlParameters = "";
         
         private HttpClient client;
@@ -35,6 +35,25 @@ namespace DalalStreetClient.Core.Services
 
         }
 
+        public bool Delete()
+        {
+            string result = "";
+
+            HttpResponseMessage response = client.DeleteAsync(UrlParameters).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                result =
+                    response.Content.ReadAsAsync<string>().Result;
+                Console.WriteLine(result);
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+                return false;
+            }
+            return true;
+        }
+
         public IEnumerable<SimpleString> GetCompanyNames()
         {
             IEnumerable<SimpleString> companyNames = null;
@@ -51,7 +70,57 @@ namespace DalalStreetClient.Core.Services
             }
             return companyNames;
         }
-        public IEnumerable<Company> GetCompany()
+        public SimpleString GetCompanyName()
+        {
+            SimpleString companyName = null;
+
+            HttpResponseMessage response = client.GetAsync(UrlParameters).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                companyName =
+                    response.Content.ReadAsAsync<SimpleString>().Result;  //Make sure to add a reference to System.Net.Http.Formatting.dll
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+            }
+            return companyName;
+        }
+        public SimpleString CreateCompanyName(SimpleString name)
+        {
+            SimpleString companyName = null;
+
+            client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json-patch+json");
+            HttpResponseMessage response = client.PostAsJsonAsync(UrlParameters, name).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                companyName =
+                    response.Content.ReadAsAsync<SimpleString>().Result;  //Make sure to add a reference to System.Net.Http.Formatting.dll
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+            }
+            return companyName;
+        }
+        public SimpleString SaveCompanyName(SimpleString name)
+        {
+            SimpleString companyName = null;
+
+            client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json-patch+json");
+            HttpResponseMessage response = client.PutAsJsonAsync(UrlParameters, name).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                companyName =
+                    response.Content.ReadAsAsync<SimpleString>().Result;  //Make sure to add a reference to System.Net.Http.Formatting.dll
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+            }
+            return companyName;
+        }
+        public IEnumerable<Company> GetCompanies()
         {
             IEnumerable<Company> companies = null;
 
@@ -67,7 +136,56 @@ namespace DalalStreetClient.Core.Services
             }
             return companies;
         }
-        public IEnumerable<CompanyCategory> GetCompanyCategory()
+        public Company GetCompany()
+        {
+            Company company = null;
+
+            HttpResponseMessage response = client.GetAsync(UrlParameters).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                company =
+                    response.Content.ReadAsAsync<Company>().Result;  //Make sure to add a reference to System.Net.Http.Formatting.dll
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+            }
+            return company;
+        }
+        public Company CreateCompany(Company company)
+        {
+            Company companyResp = null;
+
+            HttpResponseMessage response = client.PostAsJsonAsync(UrlParameters, company).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                companyResp =
+                    response.Content.ReadAsAsync<Company>().Result;  //Make sure to add a reference to System.Net.Http.Formatting.dll
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+            }
+            return companyResp;
+        }
+        public Company SaveCompany(Company company)
+        {
+            Company companyResp = null;
+
+            HttpResponseMessage response = client.PutAsJsonAsync(UrlParameters, company).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                companyResp =
+                    response.Content.ReadAsAsync<Company>().Result;  //Make sure to add a reference to System.Net.Http.Formatting.dll
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+            }
+            return companyResp;
+        }
+
+        public IEnumerable<CompanyCategory> GetCompanyCategories()
         {
             IEnumerable<CompanyCategory> categories = null;
 
@@ -83,7 +201,57 @@ namespace DalalStreetClient.Core.Services
             }
             return categories;
         }
-        public IEnumerable<EventType> GetEventType()
+
+        public CompanyCategory GetCompanyCategory()
+        {
+            CompanyCategory category = null;
+
+            HttpResponseMessage response = client.GetAsync(UrlParameters).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                category =
+                    response.Content.ReadAsAsync<CompanyCategory>().Result;  //Make sure to add a reference to System.Net.Http.Formatting.dll
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+            }
+            return category;
+        }
+        public CompanyCategory CreateCompanyCategory(CompanyCategory companyCategory)
+        {
+            CompanyCategory categoryResp = null;
+
+            HttpResponseMessage response = client.PostAsJsonAsync(UrlParameters, companyCategory).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                categoryResp =
+                    response.Content.ReadAsAsync<CompanyCategory>().Result;  //Make sure to add a reference to System.Net.Http.Formatting.dll
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+            }
+            return categoryResp;
+        }
+        public CompanyCategory SaveCompanyCategory(CompanyCategory companyCategory)
+        {
+            CompanyCategory categoryResp = null;
+
+            HttpResponseMessage response = client.PutAsJsonAsync(UrlParameters, companyCategory).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                categoryResp =
+                    response.Content.ReadAsAsync<CompanyCategory>().Result;  //Make sure to add a reference to System.Net.Http.Formatting.dll
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+            }
+            return categoryResp;
+        }
+
+        public IEnumerable<EventType> GetEventTypes()
         {
             IEnumerable<EventType> eventTypes = null;
 
@@ -99,7 +267,56 @@ namespace DalalStreetClient.Core.Services
             }
             return eventTypes;
         }
-        public IEnumerable<Event> GetEvent()
+
+        public EventType GetEventType()
+        {
+            EventType eventType = null;
+
+            HttpResponseMessage response = client.GetAsync(UrlParameters).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                eventType =
+                    response.Content.ReadAsAsync<EventType>().Result;  //Make sure to add a reference to System.Net.Http.Formatting.dll
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+            }
+            return eventType;
+        }
+        public EventType CreateEventType(EventType type)
+        {
+            EventType eventType = null;
+
+            HttpResponseMessage response = client.PostAsJsonAsync(UrlParameters, type).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                eventType =
+                    response.Content.ReadAsAsync<EventType>().Result;  //Make sure to add a reference to System.Net.Http.Formatting.dll
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+            }
+            return eventType;
+        }
+        public EventType SaveEventType(EventType type)
+        {
+            EventType eventType = null;
+
+            HttpResponseMessage response = client.PutAsJsonAsync(UrlParameters, type).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                eventType =
+                    response.Content.ReadAsAsync<EventType>().Result;  //Make sure to add a reference to System.Net.Http.Formatting.dll
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+            }
+            return eventType;
+        }
+        public IEnumerable<Event> GetEvents()
         {
             IEnumerable<Event> events = null;
 
@@ -116,17 +333,66 @@ namespace DalalStreetClient.Core.Services
             return events;
         }
 
+        public Event GetEvent()
+        {
+            Event _event = null;
+
+            HttpResponseMessage response = client.GetAsync(UrlParameters).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                _event =
+                    response.Content.ReadAsAsync<Event>().Result;  //Make sure to add a reference to System.Net.Http.Formatting.dll
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+            }
+            return _event;
+        }
+        public Event CreateEvent(Event newEvent)
+        {
+            Event _event = null;
+
+            HttpResponseMessage response = client.PostAsJsonAsync(UrlParameters, newEvent).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                _event =
+                    response.Content.ReadAsAsync<Event>().Result;  //Make sure to add a reference to System.Net.Http.Formatting.dll
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+            }
+            return _event;
+        }
+        public Event SaveEvent(Event newEvent)
+        {
+            Event _event = null;
+
+            HttpResponseMessage response = client.PutAsJsonAsync(UrlParameters, newEvent).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                _event =
+                    response.Content.ReadAsAsync<Event>().Result;  //Make sure to add a reference to System.Net.Http.Formatting.dll
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+            }
+            return _event;
+        }
+
         public bool isGameRunning()
         {
-            GameRunning running = null;
+            Boolean running = false;
             // List data response.
             HttpResponseMessage response = client.GetAsync(UrlParameters).Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
             if (response.IsSuccessStatusCode)
             {
                 // Parse the response body.
                 running =
-                    response.Content.ReadAsAsync<GameRunning>().Result;  //Make sure to add a reference to System.Net.Http.Formatting.dll
-                Console.WriteLine("{0}", running.Running);
+                    response.Content.ReadAsAsync<Boolean> ().Result;  //Make sure to add a reference to System.Net.Http.Formatting.dll
+                Console.WriteLine("{0}", running);
 
             }
             else
@@ -134,7 +400,7 @@ namespace DalalStreetClient.Core.Services
                 Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
             }
             //Make any other calls using HttpClient here.
-            return running.Running;           
+            return running;           
         }
 
         public bool StartGame()

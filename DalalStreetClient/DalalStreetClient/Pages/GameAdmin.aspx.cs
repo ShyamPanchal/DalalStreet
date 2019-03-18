@@ -17,7 +17,43 @@ namespace DalalStreetClient.Pages
 
         protected void Timer_Tick(object sender, EventArgs e)
         {
-            
+            LoadTable();
+        }
+
+        private void LoadTable()
+        {
+            Simulation game = (Simulation)Application["Game"];
+
+            PlayersTable.Rows.Clear();
+
+            TableRow row0 = new TableRow();
+            row0.BackColor = System.Drawing.Color.FromArgb(255, 252, 45, 45);
+
+            TableCell cell01 = new TableCell();
+            cell01.Text = "Name";
+            cell01.Font.Bold = true;
+            row0.Cells.Add(cell01);
+
+            TableCell cell02 = new TableCell();
+            cell02.Text = "Score";
+            cell02.Font.Bold = true;
+            row0.Cells.Add(cell02);
+
+            PlayersTable.Rows.Add(row0);
+
+
+            foreach (User user in game.Players)
+            {
+                TableRow row = new TableRow();
+                TableCell cell1 = new TableCell();
+                cell1.Text = user.Name;
+                row.Cells.Add(cell1);
+
+                TableCell cell2 = new TableCell();
+                cell2.Text = "0";
+                row.Cells.Add(cell2);
+                PlayersTable.Rows.Add(row);
+            }
         }
 
         protected void buttonStop_Click(object sender, EventArgs e)

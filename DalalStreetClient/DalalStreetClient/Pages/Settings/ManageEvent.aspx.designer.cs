@@ -7,63 +7,54 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DalalStreetClient.Pages {
+namespace DalalStreetClient.Pages.Settings {
     
     
-    public partial class GameAdmin {
+    public partial class ManageEvent {
         
         /// <summary>
-        /// tablePlayers control.
+        /// DropDownListCompany control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tablePlayers;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListCompany;
         
         /// <summary>
-        /// ScriptManager control.
+        /// DropDownListEventType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListEventType;
         
         /// <summary>
-        /// TimerToRefresh control.
+        /// buttonSave control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.Timer TimerToRefresh;
+        protected global::System.Web.UI.WebControls.Button buttonSave;
         
         /// <summary>
-        /// PlayerTablePanel control.
+        /// buttonCancel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel PlayerTablePanel;
+        protected global::System.Web.UI.WebControls.Button buttonCancel;
         
         /// <summary>
-        /// PlayersTable control.
+        /// HiddenFieldId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table PlayersTable;
-        
-        /// <summary>
-        /// buttonStop control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button buttonStop;
+        protected global::System.Web.UI.WebControls.HiddenField HiddenFieldId;
     }
 }

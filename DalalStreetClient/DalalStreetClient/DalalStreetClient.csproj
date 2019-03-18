@@ -89,6 +89,11 @@
     <Content Include="Pages\GameSettings.aspx" />
     <Content Include="Pages\PlayerWaitingRoom.aspx" />
     <Content Include="Pages\ResultPage.aspx" />
+    <Content Include="Pages\Settings\ManageCategory.aspx" />
+    <Content Include="Pages\Settings\ManageCompany.aspx" />
+    <Content Include="Pages\Settings\ManageCompanyName.aspx" />
+    <Content Include="Pages\Settings\ManageEvent.aspx" />
+    <Content Include="Pages\Settings\ManageType.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -186,6 +191,41 @@
     </Compile>
     <Compile Include="Pages\ResultPage.aspx.designer.cs">
       <DependentUpon>ResultPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings\ManageCategory.aspx.cs">
+      <DependentUpon>ManageCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Settings\ManageCategory.aspx.designer.cs">
+      <DependentUpon>ManageCategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings\ManageCompany.aspx.cs">
+      <DependentUpon>ManageCompany.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Settings\ManageCompany.aspx.designer.cs">
+      <DependentUpon>ManageCompany.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings\ManageCompanyName.aspx.cs">
+      <DependentUpon>ManageCompanyName.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Settings\ManageCompanyName.aspx.designer.cs">
+      <DependentUpon>ManageCompanyName.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings\ManageEvent.aspx.cs">
+      <DependentUpon>ManageEvent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Settings\ManageEvent.aspx.designer.cs">
+      <DependentUpon>ManageEvent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Settings\ManageType.aspx.cs">
+      <DependentUpon>ManageType.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Settings\ManageType.aspx.designer.cs">
+      <DependentUpon>ManageType.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

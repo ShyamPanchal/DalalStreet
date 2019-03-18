@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
+    <h1>Game</h1>
     <div class="w3-bar w3-white w3-center w3-medium">
 
         <asp:ScriptManager ID="ScriptManager" runat="server" />

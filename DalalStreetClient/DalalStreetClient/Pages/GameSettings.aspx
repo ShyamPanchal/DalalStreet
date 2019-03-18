@@ -3,6 +3,20 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
         <h1>Settings</h1>
+        <div id="APIUrl" runat="server" CssClass="w3-center">            
+            <asp:CustomValidator ID="CustomValidatorWorking" ValidationGroup="checkAPI" runat="server" ErrorMessage="Working!" ControlToValidate="textboxAPUIrl" ForeColor="Green" OnServerValidate="VerifyAPIWorking" Display="Dynamic" ></asp:CustomValidator>
+            <asp:CustomValidator ID="CustomValidatorValid" ValidationGroup="checkAPI" runat="server" ErrorMessage="Failed!" ControlToValidate="textboxAPUIrl" ForeColor="Red" OnServerValidate="VerifyAPI" Display="Dynamic" ></asp:CustomValidator>
+             <div class="w3-center w3-row-padding w3-right-align">
+                <asp:RequiredFieldValidator ValidationGroup="checkAPI" ID="RequiredFieldValidatorUserName" runat="server" ErrorMessage="URL Required!" ControlToValidate="textboxAPUIrl" ForeColor="Red" Display="Dynamic" ></asp:RequiredFieldValidator>
+                 <asp:Label runat="server" CssClass="w3-half w3-medium w3-right-align">URL:</asp:Label>
+			    <asp:TextBox ID="textboxAPUIrl" Width="20%" runat="server" ValidationGroup="checkAPI" CssClass="w3-half w3-input w3-border w3-round w3-left-align"  placeholder="API URL"></asp:TextBox>			 
+            </div>
+             <div class="w3-center w3-row-padding w3-margin-top"> 
+			    <asp:Button ID="buttonCheck" runat="server" ValidationGroup="checkAPI" OnClick="buttonCheckAPI_Click" Text="Check" CssClass="w3-button w3-red w3-padding w3-round" />
+                <asp:Button ID="buttonUpdate" runat="server" ValidationGroup="checkAPI" OnClick="buttonUpdateAPI_Click" Text="Update" CssClass="w3-button w3-red w3-padding w3-round" />
+            </div>
+            <br/>
+        </div>
 		<div id="tablesSettings" runat="server" CssClass="w3-center">
             <div id="companyNames" runat="server" CssClass="w3-center">
                 <h3>New Company Name</h3>
