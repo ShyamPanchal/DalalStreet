@@ -31,26 +31,50 @@ namespace DalalStreetClient.Pages.Settings
                 }
                 IEnumerable<Company> dataSource = Core.Controllers.DalalStreetAPIController.GetInstance()
                     .GetCompanies(); ;
-                DropDownListCompany.DataSource = dataSource;
 
-                if (idCompany == null)
+                int i = -1;
+                int position = -1;
+                dataSource.ToList().ForEach(company => {
+                    DropDownListCompany.Items.Add(new ListItem(company.Name, company.Id.ToString()));
+                    if (company.Id.ToString() == idCompany)
+                    {
+                        position = i;
+                    }
+                    i++;
+                });
+
+                if (position == -1)
                 {
                     DropDownListCompany.SelectedIndex = 0;
-                } else
-                {
-                    DropDownListCompany.SelectedValue = idCompany;
                 }
+                else
+                {
+                    DropDownListCompany.SelectedIndex = position;
+                }
+
                 IEnumerable<EventType> dataSource2 = Core.Controllers.DalalStreetAPIController.GetInstance()
                     .GetEventTypes(); ;
-                DropDownListEventType.DataSource = dataSource;
 
-                if (idEventType == null)
+                i = -1;
+                position = -1;
+                dataSource2.ToList().ForEach(eventType => {
+                    DropDownListEventType.Items.Add(new ListItem(eventType.TypeString, eventType.Id.ToString()));
+                    if (eventType.Id.ToString() == idEventType)
+                    {
+                        position = i;
+                    }
+                    i++;
+                });
+
+                if (position == -1)
                 {
                     DropDownListEventType.SelectedIndex = 0;
-                } else
-                    DropDownListEventType.SelectedValue = idEventType;
-                {
                 }
+                else
+                {
+                    DropDownListEventType.SelectedIndex = position;
+                }
+
             }
         }
         protected void buttonSave_Click(object sender, EventArgs e)

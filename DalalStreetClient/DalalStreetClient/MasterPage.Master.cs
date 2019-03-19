@@ -60,7 +60,7 @@ namespace DalalStreetClient
                         {
                             DoLogout();
                         }
-                        Response.Redirect("~/Pages/Dashboard/AdminDashboard.aspx");
+                        Response.Redirect("~/Pages/GameSettings.aspx");
                     }
                     else if (c.Value == "Player")
                     {
@@ -87,7 +87,7 @@ namespace DalalStreetClient
             switch (category)
             {
                 case Core.Models.User.Category.Admin:
-                    Menu_LinkButtonAdminDashboard.Visible = true;
+                    Menu_LinkButtonAdminDashboard.Visible = false;
                     Menu_LinkWaitingRoom.Visible = true;
                     Menu_LinkMenuLogout.Visible = true;
                     Menu_LinkButtonGameSettings.Visible = true;

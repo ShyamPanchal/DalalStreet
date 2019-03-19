@@ -13,6 +13,15 @@ namespace DalalStreetClient.Pages.Settings {
     public partial class ManageCategory {
         
         /// <summary>
+        /// CompanyName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CompanyName;
+        
+        /// <summary>
         /// RequiredFieldValidatorName control.
         /// </summary>
         /// <remarks>

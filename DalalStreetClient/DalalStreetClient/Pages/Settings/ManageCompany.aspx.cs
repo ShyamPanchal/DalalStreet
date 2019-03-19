@@ -25,18 +25,29 @@ namespace DalalStreetClient.Pages.Settings
                     textboxName.Text = company.Name;
                     HiddenFieldId.Value = company.Id.ToString();
                     idCategory = company.CategoryId.ToString();
+                    textboxStockValue.Text = company.StockValues.ToString();
+                    textboxTotalStock.Text = company.TotalStocks.ToString();
                 }
                 IEnumerable<CompanyCategory> dataSource = Core.Controllers.DalalStreetAPIController.GetInstance()
                     .GetCompanyCategories(); ;
-                DropDownListCompanyCategory.DataSource = dataSource;
 
-                if (idCategory == null)
+                int i = -1;
+                int position;
+                dataSource.ToList().ForEach(category => {
+                    DropDownListCompanyCategory.Items.Add(new ListItem(category.Name, category.Id.ToString()));
+                    if (category.Id.ToString() == idCategory)
+                    {
+                        position = i;
+                    }
+                    i++;
+                });
+
+                if (i == -1)
                 {
                     DropDownListCompanyCategory.SelectedIndex = 0;
-                }
-                else
+                } else
                 {
-                    DropDownListCompanyCategory.SelectedValue = idCategory;
+                    DropDownListCompanyCategory.SelectedIndex = i;
                 }
             }
         }
@@ -47,8 +58,8 @@ namespace DalalStreetClient.Pages.Settings
                 Company company = new Company();
                 company.Name = textboxName.Text;
                 company.CategoryId = Int16.Parse(DropDownListCompanyCategory.SelectedValue);
-                company.StockValues = Int16.Parse(textboxStockValue.Text);
-                company.TotalStocks = Int16.Parse(textboxTotalStock.Text);
+                company.StockValues = Int32.Parse(textboxStockValue.Text);
+                company.TotalStocks = Int32.Parse(textboxTotalStock.Text);
                 Core.Controllers.DalalStreetAPIController.GetInstance().CreateCompany(company);
             }
             else
@@ -57,8 +68,8 @@ namespace DalalStreetClient.Pages.Settings
                     .GetCompany(Int16.Parse(HiddenFieldId.Value));
                 company.Name = textboxName.Text;
                 company.CategoryId = Int16.Parse(DropDownListCompanyCategory.SelectedValue);
-                company.StockValues = Int16.Parse(textboxStockValue.Text);
-                company.TotalStocks = Int16.Parse(textboxTotalStock.Text);
+                company.StockValues = Int32.Parse(textboxStockValue.Text);
+                company.TotalStocks = Int32.Parse(textboxTotalStock.Text);
                 Core.Controllers.DalalStreetAPIController.GetInstance().SaveCompany(company);
             }
             Session["objId"] = null;

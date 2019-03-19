@@ -100,7 +100,7 @@ namespace DalalStreetClient.Core.Controllers
 
         public Company GetCompany(long id)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_NewCompany/" + id);
+            DalalStreetAPIService service = new DalalStreetAPIService("/DS_Company/" + id);
             Company result = service.GetCompany();
             service.DisposeClient();
             return result;
@@ -108,7 +108,7 @@ namespace DalalStreetClient.Core.Controllers
         }
         public Company CreateCompany(Company company)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_NewCompany");
+            DalalStreetAPIService service = new DalalStreetAPIService("/DS_Company");
             Company result = service.CreateCompany(company);
             service.DisposeClient();
             return result;
@@ -116,7 +116,7 @@ namespace DalalStreetClient.Core.Controllers
         }
         public Company SaveCompany(Company company)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_NewCompany/" + company.Id);
+            DalalStreetAPIService service = new DalalStreetAPIService("/DS_Company/" + company.Id);
             Company result = service.SaveCompany(company);
             service.DisposeClient();
             return result;
@@ -124,7 +124,7 @@ namespace DalalStreetClient.Core.Controllers
         }
         public bool DeleteCompany(long id)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_NewCompany/" + id);
+            DalalStreetAPIService service = new DalalStreetAPIService("/DS_Company/" + id);
             bool result = service.Delete();
             service.DisposeClient();
             return result;

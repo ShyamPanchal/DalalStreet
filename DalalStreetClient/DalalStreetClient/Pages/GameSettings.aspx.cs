@@ -238,7 +238,8 @@ namespace DalalStreetClient.Pages
                 row.Cells.Add(cell1);
 
                 TableCell cell2 = new TableCell();
-                cell2.Text = "" + company.CategoryId;
+                CompanyCategory category =  Core.Controllers.DalalStreetAPIController.GetInstance().GetCompanyCategory(company.CategoryId);
+                cell2.Text = category.Name;
                 row.Cells.Add(cell2);
 
                 TableCell cell3 = new TableCell();
@@ -437,11 +438,13 @@ namespace DalalStreetClient.Pages
             {
                 TableRow row = new TableRow();
                 TableCell cell1 = new TableCell();
-                cell1.Text = "" + enews.OnCompanyId;
+                Company company= Core.Controllers.DalalStreetAPIController.GetInstance().GetCompany(enews.OnCompanyId);
+                cell1.Text = company.Name;
                 row.Cells.Add(cell1);
 
                 TableCell cell2 = new TableCell();
-                cell2.Text = "" + enews.EventTypeId;
+                EventType type = Core.Controllers.DalalStreetAPIController.GetInstance().GetEventType(enews.EventTypeId);
+                cell2.Text = type.TypeString;
                 row.Cells.Add(cell2);
                 NewsEventsTable.Rows.Add(row);
 
