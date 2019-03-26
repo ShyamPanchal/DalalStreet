@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace DalalStreetAPI
@@ -29,7 +30,10 @@ namespace DalalStreetAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
 
             services.AddDbContext<DS_Context>(options => options.UseSqlServer(Configuration.GetConnectionString("DS_db")));
 
@@ -38,6 +42,8 @@ namespace DalalStreetAPI
             services.AddScoped<IDS_NewCompanyNamesService, DS_NewCompanyNamesService>();
             services.AddScoped<IDS_EventTypesService, DS_EventTypesService>();
             services.AddScoped<IDS_NewsEventService, DS_NewsEventService>();
+            services.AddScoped<ITransactionService, TransactionService>();
+            services.AddScoped<IDS_PlayerService, DS_PlayerService>();
 
             services.AddMvc(options =>
             {
@@ -61,10 +67,12 @@ namespace DalalStreetAPI
         {
             if (env.IsDevelopment())
             {
+                Console.WriteLine("In Development Mode");
                 app.UseDeveloperExceptionPage();
             }
             else
             {
+                Console.WriteLine("Not In Development Mode");
                 app.UseHsts();
             }
 

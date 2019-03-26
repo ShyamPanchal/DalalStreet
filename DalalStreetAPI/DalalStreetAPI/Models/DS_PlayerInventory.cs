@@ -7,17 +7,19 @@ using System.Threading.Tasks;
 
 namespace DalalStreetAPI.Models
 {
-    public class DS_NewsEvent
+    public class DS_PlayerInventory
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }        
+        public int Id { get; set; }
 
-        public int EventTypeId { get; set; }
-        [ForeignKey("EventTypeId")]
-        public DS_EventTypes DS_EventType { get; set; }
+        public int OwnedStocks { get; set; }
 
-        public int OnCompanyId { get; set; }
-        [ForeignKey("OnCompanyId")]
+        public int PlayerId { get; set; }
+        [ForeignKey("PlayerId")]
+        public DS_Player DS_Player { get; set; }
+
+        public int CompanyId { get; set; }
+        [ForeignKey("CompanyId")]
         public DS_Company DS_Company { get; set; }
     }
 }
