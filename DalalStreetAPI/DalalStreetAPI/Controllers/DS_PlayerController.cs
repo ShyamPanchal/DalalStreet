@@ -31,7 +31,7 @@ namespace DalalStreetAPI.Controllers
         }
 
         //GET api/DS_Player/id
-        [HttpGet("{id}", Name = nameof(GetPlayerByIdAsync))]
+        [HttpGet("getPlayer/{id}", Name = nameof(GetPlayerByIdAsync))]
         [ProducesResponseType(typeof(DS_Player), 200)]
         [ProducesResponseType(404)]
         public async Task<IActionResult> GetPlayerByIdAsync(int id)
@@ -48,16 +48,28 @@ namespace DalalStreetAPI.Controllers
         }
 
         //POST api/DS_Player
-        [HttpPost]
-        [ProducesResponseType(typeof(DS_Player), 201)]
+        [HttpPost("addPlayer")]
+        [ProducesResponseType(typeof(string), 201)]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> AddPlayerAsync([FromBody]DS_Player player)
+        public async Task<IActionResult> AddPlayerAsync([FromBody]string playerName)
         {
-            if (player == null)
+            if (playerName == null)
             {
                 return BadRequest();
             }
+            else if(playerName == "")
+            {
+                return BadRequest();
+            }
+
+            DS_Player player = new DS_Player();
+
+            player.Name = playerName;
+            player.Balance = AppData.InitialStartMoney;
+            player.Score = 0;
+
             await _service.AddPlayer(player);
+
             return CreatedAtRoute(nameof(GetPlayerByIdAsync), new { id = player.Id }, player);
         }
 

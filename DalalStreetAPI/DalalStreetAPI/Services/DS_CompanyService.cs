@@ -10,15 +10,10 @@ namespace DalalStreetAPI.Services
     public class DS_CompanyService : IDS_CompanyService
     {
         private readonly DS_Context _context;
-        private readonly ConcurrentDictionary<int, DS_Company> _products = new ConcurrentDictionary<int, DS_Company>();
 
         public DS_CompanyService(DS_Context context)
         {
             _context = context;
-            foreach (var a in context.DS_Company)
-            {
-                _products.TryAdd(a.Id, a);
-            }
         }
 
         public Task AddAsync(DS_Company record)
