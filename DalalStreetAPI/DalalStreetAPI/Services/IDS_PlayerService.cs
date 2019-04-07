@@ -20,6 +20,8 @@ namespace DalalStreetAPI.Services
         Task<bool> SellStocks(TransactionModel obj);
 
         Task SellAllPlayerStocks();
+
+        Task ResetGame();
         #endregion
     }
 }

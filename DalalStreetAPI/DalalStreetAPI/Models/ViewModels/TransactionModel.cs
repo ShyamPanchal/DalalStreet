@@ -12,7 +12,5 @@ namespace DalalStreetAPI.Models.ViewModels
         public int CompanyId { get; set; }
 
         public int TotalStocks { get; set; }
-
-        public double StockValue { get; set; }
     }
 }

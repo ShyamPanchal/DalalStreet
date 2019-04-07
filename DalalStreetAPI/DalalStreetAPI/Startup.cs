@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DalalStreetAPI.Cron;
 using DalalStreetAPI.Models;
 using DalalStreetAPI.Services;
+using FluentScheduler;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -60,6 +62,20 @@ namespace DalalStreetAPI
                     Description = "Service for Dalal Street using Async "
                 });
             });
+
+            #region Cron
+
+            ServiceProvider provider = services.BuildServiceProvider();
+
+            Registry updateFunction = new Registry();
+            updateFunction.Schedule(() => new UpdateCron(provider)).ToRunNow().AndEvery(2).Seconds();
+
+            JobManager.UseUtcTime();
+            JobManager.Initialize(updateFunction);
+
+            Console.WriteLine("Update function registered.");
+
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
