@@ -385,7 +385,7 @@ namespace DalalStreetAPI.Services
             var list = _context.TransactionLogs.AsEnumerable();
             foreach (var i in list)
             {
-                _context.DS_NewsEvent.Remove(i);
+                _context.TransactionLogs.Remove(i);
             }
             _context.SaveChanges();
         }
