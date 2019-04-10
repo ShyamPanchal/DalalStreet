@@ -22,6 +22,8 @@ namespace DalalStreetAPI.Services
         Task SellAllPlayerStocks();
 
         Task ResetGame();
+
+        Task<IEnumerable<DS_PlayerInventory>> GetPlayerInventory(int id);
         #endregion
     }
 }

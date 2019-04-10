@@ -101,5 +101,15 @@ namespace DalalStreetAPI.Controllers
             return new ObjectResult(result);
         }
 
+        //GET: api/DS_Player
+        [HttpGet()]
+        [Route("playerInventory/{id}")]
+        [ProducesResponseType(typeof(IEnumerable<DS_PlayerInventory>), 200)]
+        public async Task<IEnumerable<DS_PlayerInventory>> GetPlayerInventoryAsync(int id)
+        {
+            IEnumerable<DS_PlayerInventory> records = await _service.GetPlayerInventory(id);
+
+            return records;
+        }
     }
 }
