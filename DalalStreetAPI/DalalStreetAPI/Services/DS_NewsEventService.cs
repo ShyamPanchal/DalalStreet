@@ -44,9 +44,9 @@ namespace DalalStreetAPI.Services
             return Task.FromResult(record);
         }
 
-        public Task<IEnumerable<DS_NewsEvent>> GetAllAsync()
+        public Task<IEnumerable<DS_NewsEvent>> GetAllAsync(int count)
         {
-            IEnumerable<DS_NewsEvent> record = _context.DS_NewsEvent.AsEnumerable();
+            IEnumerable<DS_NewsEvent> record = _context.DS_NewsEvent.Reverse().Take(count).AsEnumerable();
             return Task.FromResult(record);
         }
 

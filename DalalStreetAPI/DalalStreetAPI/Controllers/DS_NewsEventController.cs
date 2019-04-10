@@ -19,12 +19,12 @@ namespace DalalStreetAPI.Controllers
         }
 
         //GET: api/DS_NewsEvent
-        [HttpGet()]
-        [Route("allrecords")]
+        [HttpGet]
+        [Route("allrecords/{count}")]
         [ProducesResponseType(typeof(IEnumerable<DS_NewsEvent>), 200)]
-        public async Task<IEnumerable<DS_NewsEvent>> GetNewsEventAsync()
+        public async Task<IEnumerable<DS_NewsEvent>> GetNewsEventAsync(int count)
         {
-            IEnumerable<DS_NewsEvent> records = await _dsService.GetAllAsync();
+            IEnumerable<DS_NewsEvent> records = await _dsService.GetAllAsync(count);
 
             return records;
         }

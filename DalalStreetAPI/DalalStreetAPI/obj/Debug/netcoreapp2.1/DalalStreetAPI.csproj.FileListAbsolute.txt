@@ -12,3 +12,17 @@ C:\Users\Shyam\Desktop\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\obj
 C:\Users\Shyam\Desktop\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\obj\Debug\netcoreapp2.1\DalalStreetAPI.dll
 C:\Users\Shyam\Desktop\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\obj\Debug\netcoreapp2.1\DalalStreetAPI.pdb
 C:\Users\Shyam\Desktop\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\obj\Debug\netcoreapp2.1\DalalStreetAPI.csprojAssemblyReference.cache
+D:\Semester 4\Software Development Project 2\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\bin\Debug\netcoreapp2.1\DalalStreetAPI.deps.json
+D:\Semester 4\Software Development Project 2\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\bin\Debug\netcoreapp2.1\DalalStreetAPI.runtimeconfig.json
+D:\Semester 4\Software Development Project 2\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\bin\Debug\netcoreapp2.1\DalalStreetAPI.runtimeconfig.dev.json
+D:\Semester 4\Software Development Project 2\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\bin\Debug\netcoreapp2.1\DalalStreetAPI.dll
+D:\Semester 4\Software Development Project 2\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\bin\Debug\netcoreapp2.1\DalalStreetAPI.pdb
+D:\Semester 4\Software Development Project 2\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\obj\Debug\netcoreapp2.1\DalalStreetAPI.csprojAssemblyReference.cache
+D:\Semester 4\Software Development Project 2\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\obj\Debug\netcoreapp2.1\DalalStreetAPI.csproj.CoreCompileInputs.cache
+D:\Semester 4\Software Development Project 2\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\obj\Debug\netcoreapp2.1\DalalStreetAPI.RazorAssemblyInfo.cache
+D:\Semester 4\Software Development Project 2\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\obj\Debug\netcoreapp2.1\DalalStreetAPI.RazorAssemblyInfo.cs
+D:\Semester 4\Software Development Project 2\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\obj\Debug\netcoreapp2.1\DalalStreetAPI.AssemblyInfoInputs.cache
+D:\Semester 4\Software Development Project 2\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\obj\Debug\netcoreapp2.1\DalalStreetAPI.AssemblyInfo.cs
+D:\Semester 4\Software Development Project 2\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\obj\Debug\netcoreapp2.1\DalalStreetAPI.RazorTargetAssemblyInfo.cache
+D:\Semester 4\Software Development Project 2\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\obj\Debug\netcoreapp2.1\DalalStreetAPI.dll
+D:\Semester 4\Software Development Project 2\DalalStreet\DalalStreet\DalalStreetAPI\DalalStreetAPI\obj\Debug\netcoreapp2.1\DalalStreetAPI.pdb

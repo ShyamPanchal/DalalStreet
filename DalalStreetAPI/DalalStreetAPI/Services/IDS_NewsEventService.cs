@@ -12,7 +12,7 @@ namespace DalalStreetAPI.Services
         Task AddAsync(DS_NewsEvent record);
         Task AddRecordAsync(IEnumerable<DS_NewsEvent> records);
         Task<DS_NewsEvent> RemoveAsync(int id);
-        Task<IEnumerable<DS_NewsEvent>> GetAllAsync();
+        Task<IEnumerable<DS_NewsEvent>> GetAllAsync(int count);
         Task<DS_NewsEvent> FindAsync(int id);
         Task UpdateAsync(DS_NewsEvent record);
         #endregion
