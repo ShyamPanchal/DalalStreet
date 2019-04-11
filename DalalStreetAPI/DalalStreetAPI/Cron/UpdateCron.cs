@@ -104,7 +104,12 @@ namespace DalalStreetAPI.Cron
 
                 foreach (var c in companiesInSameCategory)
                 {
+                    int temp = c.stockValues;
                     c.stockValues = (int)((selectedEvent.EffectOnOthers * c.stockValues) + c.stockValues);
+                    if(c.stockValues < 1)
+                    {
+                        c.stockValues = temp;
+                    }
                 }
 
                 // Commit
