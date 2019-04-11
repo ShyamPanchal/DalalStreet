@@ -302,6 +302,12 @@ namespace DalalStreetAPI.Services
             return Task.FromResult(inventory);
         }
 
+        public Task<DS_PlayerInventory> GetPlayerInventory(int playerId, int companyId)
+        {
+            var inventory = _context.DS_PlayerInventory.Where(x => x.PlayerId == playerId).Where(x=>x.CompanyId == companyId).AsEnumerable().FirstOrDefault();
+            return Task.FromResult(inventory);
+        }
+
         public Task ResetGame()
         {
             RemoveAllInventory();
