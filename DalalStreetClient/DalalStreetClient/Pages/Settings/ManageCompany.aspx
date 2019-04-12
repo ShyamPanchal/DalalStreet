@@ -15,16 +15,15 @@
 			    <asp:DropDownList DataValueField="Name" CssClass="w3-left-align w3-half w3-round w3-medium" ID="DropDownListCompanyCategory" Width="20%" runat="server"></asp:DropDownList>	
 		    </div>
             <div class="w3-center w3-row-padding ">
-                <asp:RangeValidator ID="RangeValidator1" runat="server" ValidationGroup="Manage" MinimumValue="0" MaximumValue="10000000" ControlToValidate="textboxTotalStock" ErrorMessage="Must be between More than 0!" ForeColor="Red"></asp:RangeValidator>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ValidationGroup="Manage" runat="server" ErrorMessage="Required!" ControlToValidate="textboxTotalStock" ForeColor="Red"></asp:RequiredFieldValidator> 
 			    <asp:Label runat="server" CssClass="w3-half w3-medium w3-right-align">Total Stock:</asp:Label>
 			    <asp:TextBox ID="textboxTotalStock" runat="server" Width="20%" ValidationGroup="Manage" CssClass="w3-left-align w3-half w3-input w3-border w3-round w3-medium"></asp:TextBox>
 		    </div>
             <div class="w3-center w3-row-padding ">                
-				<asp:RangeValidator ID="RangeValidator2" runat="server" ValidationGroup="Manage" MinimumValue="0" MaximumValue="10000000" ControlToValidate="textboxStockValue" ErrorMessage="Must be between More than 0!" ForeColor="Red"></asp:RangeValidator>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ValidationGroup="Manage" runat="server" ErrorMessage="Required!" ControlToValidate="textboxStockValue" ForeColor="Red"></asp:RequiredFieldValidator>                 
 			    <asp:Label runat="server" CssClass="w3-half w3-medium w3-right-align">Stock Value:</asp:Label>
 			    <asp:TextBox ID="textboxStockValue" runat="server" ValidationGroup="Manage"  Width="20%" CssClass="w3-left-align w3-half w3-input w3-border w3-round w3-medium"></asp:TextBox>
+                
 		    </div>
             <div class="w3-center w3-row-padding w3-margin-top">
 			    <asp:Button ID="buttonSave" runat="server" ValidationGroup="Manage" OnClick="buttonSave_Click" Text="Save" CssClass="w3-button w3-red w3-padding w3-round w3-margin-top" />

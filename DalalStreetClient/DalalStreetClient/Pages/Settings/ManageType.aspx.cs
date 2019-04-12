@@ -25,6 +25,7 @@ namespace DalalStreetClient.Pages.Settings
                     textboxLikelyhood.Text = "" + type.Likelihood;
                     textboxEffectOnOthers.Text = "" + type.EffectOnOthers;
                     textboxEffectOnSelf.Text = "" + type.EffectOnSelf;
+                    HiddenFieldId.Value = "" + type.Id;
                 }
             }
         }
@@ -35,7 +36,7 @@ namespace DalalStreetClient.Pages.Settings
                 EventType type = new EventType();
                 type.TypeString = textboxTypeString.Text;
 
-                type.Likelihood = Int16.Parse(textboxLikelyhood.Text);
+                type.Likelihood = Decimal.Parse(textboxLikelyhood.Text);
                 type.EffectOnOthers = Decimal.Parse(textboxEffectOnOthers.Text);
                 type.EffectOnSelf = Decimal.Parse(textboxEffectOnSelf.Text);
 
@@ -46,7 +47,7 @@ namespace DalalStreetClient.Pages.Settings
                 EventType type = Core.Controllers.DalalStreetAPIController.GetInstance()
                     .GetEventType(Int16.Parse(HiddenFieldId.Value));
                 type.TypeString = textboxTypeString.Text;
-                type.Likelihood = Int16.Parse(textboxLikelyhood.Text);
+                type.Likelihood = Decimal.Parse(textboxLikelyhood.Text);
                 type.EffectOnOthers = Decimal.Parse(textboxEffectOnOthers.Text);
                 type.EffectOnSelf = Decimal.Parse(textboxEffectOnSelf.Text);
                 Core.Controllers.DalalStreetAPIController.GetInstance().SaveEventType(type);

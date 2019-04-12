@@ -26,11 +26,28 @@ namespace DalalStreetClient.Core.Models
         public string IP { get; set; }
         public Category category { get; set; }
 
+        public Player player { get; set; }
+
         public User(string Name, string IP, Category category)
         {
             this.Name = Name;
             this.IP = IP;
             this.category = category;
         }
+    }
+
+    public class Player
+    {
+        public string Name { get; set; }
+        public int Id { get; set; }
+        public int Score { get; set; }
+        public Double Balance { get; set; }
+    }
+
+    public class Inventory
+    {
+        public int playerId { get; set; }
+        public int companyId { get; set; }
+        public int ownedStocks { get; set; }
     }
 }

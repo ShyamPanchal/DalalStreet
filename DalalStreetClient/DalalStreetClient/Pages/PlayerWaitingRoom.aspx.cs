@@ -15,12 +15,21 @@ namespace DalalStreetClient.Pages
             if (Application["Game"]==null)
             {
                 //do something?
+                (Master as MasterPage).DoLogout();
             } else
-            {               
+            {   /*
                 int times = (int)Application["Times"];
                 times++;
-                Application["Times"] = times;
+                Application["Times"] = times;*/
                 //Update_Times.Text = "" + times;
+
+                
+                Simulation game = (Simulation)Application["Game"];
+                if (game.Running)
+                {
+                    Response.Redirect("~/Pages/GamePlayer.aspx");
+                }
+
                 LoadTable();
 
             }
@@ -39,7 +48,11 @@ namespace DalalStreetClient.Pages
         private void LoadTable()
         {
             Simulation game = (Simulation)Application["Game"];
-            if (game.Running)
+            if (game == null)
+            {
+                (Master as MasterPage).DoLogout();
+                return;
+            } else if (game.Running)
             {
                 Response.Redirect("~/Pages/GamePlayer.aspx");
             }
@@ -54,24 +67,27 @@ namespace DalalStreetClient.Pages
             cell01.Font.Bold = true;
             row0.Cells.Add(cell01);
 
+            /*
             TableCell cell02 = new TableCell();
             cell02.Text = "IP";
             cell02.Font.Bold = true;
-            row0.Cells.Add(cell02);
+            row0.Cells.Add(cell02);*/
 
             PlayersTable.Rows.Add(row0);
 
+            IEnumerable<Player> players = Core.Controllers.DalalStreetAPIController.GetInstance().GetAllPlayers();
 
-            foreach (User user in game.Players)
+            foreach (Player user in players)
             {
                 TableRow row = new TableRow();
                 TableCell cell1 = new TableCell();
                 cell1.Text = user.Name;
                 row.Cells.Add(cell1);
-                
+                /*
                 TableCell cell2 = new TableCell();
                 cell2.Text = user.IP;
                 row.Cells.Add(cell2);
+                */
                 PlayersTable.Rows.Add(row);
             }
         }

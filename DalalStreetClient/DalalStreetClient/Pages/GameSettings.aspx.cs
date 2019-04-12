@@ -12,24 +12,39 @@ namespace DalalStreetClient.Pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            if (Application["Game"] == null)
+            {
+                (Master as MasterPage).DoLogout();
+            }
+
             if (!IsPostBack)
             {
                 textboxAPUIrl.Text = Core.Services.DalalStreetAPIService.URL;
             }
+            UpdateTables();
+            
+        }
+
+        private void UpdateTables ()
+        {
             try
             {
+                Simulation game = (Simulation)Application["Game"];
+
                 LoadCompanyNameTable();
                 LoadCompanyCategoryTable();
                 LoadCompanyTable();
                 LoadEventTypeTable();
                 LoadEventTable();
-            } catch(Exception exception)
+            }
+            catch (Exception exception)
             {
                 //problem
             }
         }
 
-        private void LoadCompanyNameTable()
+        private void LoadCompanyNameTable(bool isRunning = false)
         {
 
             CompanyNameTable.Rows.Clear();
@@ -109,7 +124,7 @@ namespace DalalStreetClient.Pages
             CompanyNameTable.Rows.Add(newrow);
         }
 
-        private void LoadCompanyCategoryTable()
+        private void LoadCompanyCategoryTable(bool isRunning = false)
         {
 
             CompanyCategoryTable.Rows.Clear();
@@ -189,7 +204,7 @@ namespace DalalStreetClient.Pages
             CompanyNameTable.Rows.Add(newrow);
         }
 
-        private void LoadCompanyTable()
+        private void LoadCompanyTable(bool isRunning = false)
         {
 
             CompanyTable.Rows.Clear();
@@ -298,7 +313,7 @@ namespace DalalStreetClient.Pages
             CompanyNameTable.Rows.Add(newrow);
         }
 
-        private void LoadEventTypeTable()
+        private void LoadEventTypeTable(bool isRunning = false)
         {
 
             EventTypeTable.Rows.Clear();
@@ -403,7 +418,7 @@ namespace DalalStreetClient.Pages
             row0.Cells.Add(cell);
             CompanyNameTable.Rows.Add(newrow);
         }
-        private void LoadEventTable()
+        private void LoadEventTable(bool isRunning = false)
         {
 
             NewsEventsTable.Rows.Clear();
@@ -433,7 +448,12 @@ namespace DalalStreetClient.Pages
 
             NewsEventsTable.Rows.Add(row0);
 
-            IEnumerable<Event> events = Core.Controllers.DalalStreetAPIController.GetInstance().GetEvents();
+            IEnumerable<Event> events = new List<Event>();
+
+            if (!isRunning)
+            {
+                events = Core.Controllers.DalalStreetAPIController.GetInstance().GetEvents(10);
+            }
             foreach (Event enews in events)
             {
                 TableRow row = new TableRow();
@@ -536,6 +556,12 @@ namespace DalalStreetClient.Pages
         protected void buttonUpdateAPI_Click(object sender, EventArgs e)
         {
             Core.Services.DalalStreetAPIService.URL = textboxAPUIrl.Text;
+        }
+
+        protected void buttonReset_click(object sender, EventArgs e)
+        {
+            Core.Controllers.DalalStreetAPIController.GetInstance().resetGame();
+            UpdateTables();
         }
     }
 }

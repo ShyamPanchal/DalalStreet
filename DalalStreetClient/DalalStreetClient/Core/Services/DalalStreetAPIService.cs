@@ -54,6 +54,7 @@ namespace DalalStreetClient.Core.Services
             return true;
         }
 
+        #region Admin
         public IEnumerable<SimpleString> GetCompanyNames()
         {
             IEnumerable<SimpleString> companyNames = null;
@@ -381,7 +382,116 @@ namespace DalalStreetClient.Core.Services
             }
             return _event;
         }
+        #endregion
 
+        #region Player
+
+        public Player AddPlayer(string name)
+        {
+            Player user = null;
+            client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json-patch+json");
+            HttpResponseMessage response = client.PostAsJsonAsync(UrlParameters, name).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                user =
+                    response.Content.ReadAsAsync<Player>().Result;
+                Console.WriteLine("{0}", user);
+
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+            }
+            return user;
+        }
+
+        public Player GetPlayer()
+        {
+            Player player = null;
+
+            HttpResponseMessage response = client.GetAsync(UrlParameters).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                player =
+                    response.Content.ReadAsAsync<Player>().Result;
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+            }
+            return player;
+        }
+
+        public Inventory GetPlayerInventory()
+        {
+            IEnumerable <Inventory> inventory = null;
+
+            HttpResponseMessage response = client.GetAsync(UrlParameters).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                inventory =
+                    response.Content.ReadAsAsync<IEnumerable<Inventory>>().Result;
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+            }
+
+            Inventory i = new Inventory();
+            try
+            {
+                foreach(Inventory inv in inventory)
+                {
+                    i = inv;
+                }
+            } catch (Exception e)
+            {
+                return i;
+            }
+            return i;
+        }
+
+        public IEnumerable<Player> GetAllPlayers()
+        {
+            IEnumerable <Player> player = null;
+
+            HttpResponseMessage response = client.GetAsync(UrlParameters).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                player =
+                    response.Content.ReadAsAsync<IEnumerable<Player>>().Result;
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+            }
+            return player;
+        }
+
+        public bool BuyOrSell(int playerId, int companyId, int stocks)
+        {
+            Transaction transaction = new Transaction(playerId, companyId, stocks);
+                
+            bool resp = false;
+            client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json-patch+json");
+            HttpResponseMessage response = client.PostAsJsonAsync(UrlParameters, transaction).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                resp =
+                    response.Content.ReadAsAsync<bool>().Result;
+                Console.WriteLine("{0}", resp);
+
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+            }
+            return resp;
+        }
+        #endregion
+
+
+        #region Game
         public bool isGameRunning()
         {
             Boolean running = false;
@@ -405,12 +515,10 @@ namespace DalalStreetClient.Core.Services
 
         public bool StartGame()
         {
-            GameRunning par = new GameRunning();
-            par.Running = true;
             Boolean running = false;
             // List data response.
             client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json-patch+json");
-            HttpResponseMessage response = client.PostAsJsonAsync(UrlParameters, true).Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
+            HttpResponseMessage response = client.GetAsync(UrlParameters).Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
             if (response.IsSuccessStatusCode)
             {
                 // Parse the response body.
@@ -429,12 +537,10 @@ namespace DalalStreetClient.Core.Services
 
         public bool StopGame()
         {
-            GameRunning par = new GameRunning();
-            par.Running = false;
             Boolean running = false;
             // List data response.
             client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json-patch+json");
-            HttpResponseMessage response = client.PostAsJsonAsync(UrlParameters, false).Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
+            HttpResponseMessage response = client.GetAsync(UrlParameters).Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
             if (response.IsSuccessStatusCode)
             {
                 // Parse the response body.
@@ -451,6 +557,28 @@ namespace DalalStreetClient.Core.Services
             return running;
         }
 
+        public void ResetGame()
+        {
+            string running = "";
+            // List data response.
+            client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json-patch+json");
+            HttpResponseMessage response = client.GetAsync(UrlParameters).Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
+            if (response.IsSuccessStatusCode)
+            {
+                // Parse the response body.
+                running =
+                    response.Content.ReadAsAsync<string>().Result;  //Make sure to add a reference to System.Net.Http.Formatting.dll
+                Console.WriteLine("{0}", running);
+
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+            }
+            //Make any other calls using HttpClient here.
+        }
+
+        #endregion
         public void DisposeClient()
         {
             //Dispose once all HttpClient calls are complete. This is not necessary if the containing object will be disposed of; for example in this case the HttpClient instance will be disposed automatically when the application terminates so the following call is superfluous.

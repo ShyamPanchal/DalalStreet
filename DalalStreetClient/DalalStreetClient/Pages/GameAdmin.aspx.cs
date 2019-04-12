@@ -12,7 +12,16 @@ namespace DalalStreetClient.Pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Application["Game"] == null)
+            {
+                (Master as MasterPage).DoLogout();
+            } else
+            {
+                if (Request.Cookies["UserID"] != null)
+                {
+                    LoadTable();
+                }
+            }
         }
 
         protected void Timer_Tick(object sender, EventArgs e)
@@ -23,6 +32,10 @@ namespace DalalStreetClient.Pages
         private void LoadTable()
         {
             Simulation game = (Simulation)Application["Game"];
+            if (game == null)
+            {
+                (Master as MasterPage).DoLogout();
+            }
 
             PlayersTable.Rows.Clear();
 
@@ -41,16 +54,17 @@ namespace DalalStreetClient.Pages
 
             PlayersTable.Rows.Add(row0);
 
+            IEnumerable<Player> players = Core.Controllers.DalalStreetAPIController.GetInstance().GetAllPlayers();
 
-            foreach (User user in game.Players)
+            foreach (Player player in players)
             {
                 TableRow row = new TableRow();
                 TableCell cell1 = new TableCell();
-                cell1.Text = user.Name;
+                cell1.Text = player.Name;
                 row.Cells.Add(cell1);
 
                 TableCell cell2 = new TableCell();
-                cell2.Text = "0";
+                cell2.Text = "" + player.Score;
                 row.Cells.Add(cell2);
                 PlayersTable.Rows.Add(row);
             }
@@ -58,9 +72,13 @@ namespace DalalStreetClient.Pages
 
         protected void buttonStop_Click(object sender, EventArgs e)
         {
+            bool b = Core.Controllers.DalalStreetAPIController.GetInstance().StopGame();
             Simulation game = (Simulation)Application["Game"];            
-            game.Running = Core.Controllers.DalalStreetAPIController.GetInstance().StopGame();
-            Response.Redirect("~/Pages/ResultPage.aspx");
+            if (game != null)
+            {
+                game.Running = b;
+                Response.Redirect("~/Pages/ResultPage.aspx");
+            }
         }
     }
 }

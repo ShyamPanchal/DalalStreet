@@ -13,6 +13,15 @@ namespace DalalStreetClient {
     public partial class Login {
         
         /// <summary>
+        /// CustomValidatorDuplicated control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator CustomValidatorDuplicated;
+        
+        /// <summary>
         /// CustomValidatorValid control.
         /// </summary>
         /// <remarks>

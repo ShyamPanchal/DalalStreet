@@ -32,6 +32,7 @@
     <h1>Login</h1>
 	<div class="w3-bar w3-white w3-center w3-medium">
 		<p>
+            <asp:CustomValidator ID="CustomValidatorDuplicated" ValidationGroup="login" runat="server" ErrorMessage="There is no game Available!" ControlToValidate="textboxUserName" ForeColor="Red" OnServerValidate="VerifyUser" Display="Dynamic" ></asp:CustomValidator>
             <asp:CustomValidator ID="CustomValidatorValid" ValidationGroup="login" runat="server" ErrorMessage="There is no game Available!" ControlToValidate="textboxUserName" ForeColor="Red" OnServerValidate="VerifyGame" Display="Dynamic" ></asp:CustomValidator>
             <asp:RequiredFieldValidator ValidationGroup="login" ID="RequiredFieldValidatorUserName" runat="server" ErrorMessage="User Name Required" ControlToValidate="textboxUserName" ForeColor="Red" Display="Dynamic" ></asp:RequiredFieldValidator>
 			<asp:TextBox ID="textboxUserName" runat="server" ValidationGroup="login" CssClass="w3-input w3-border w3-round" placeholder="Username"></asp:TextBox>			 

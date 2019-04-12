@@ -106,6 +106,7 @@
     <Compile Include="Core\Models\Event.cs" />
     <Compile Include="Core\Models\EventType.cs" />
     <Compile Include="Core\Models\SimpleString.cs" />
+    <Compile Include="Core\Models\Transaction.cs" />
     <Compile Include="Core\Services\DalalStreetAPIService.cs" />
     <Compile Include="Core\Services\TestCallController.cs" />
     <Compile Include="Core\Models\Settings.cs" />

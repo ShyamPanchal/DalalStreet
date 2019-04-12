@@ -23,16 +23,17 @@ namespace DalalStreetClient.Core.Controllers
 
         public bool isGameRunning()
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/Application/getgamestart", "");
+            DalalStreetAPIService service = new DalalStreetAPIService("/Application/getgamestart");
             bool result = service.isGameRunning();
             service.DisposeClient();
             return result;
 
         }
 
+        #region GAME
         public bool StartGame()
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/Application", "?gameStatus=true");
+            DalalStreetAPIService service = new DalalStreetAPIService("/Application/Start");
             bool result = service.StartGame();
             service.DisposeClient();
             return result;
@@ -41,12 +42,21 @@ namespace DalalStreetClient.Core.Controllers
 
         public bool StopGame()
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/Application", "?gameStatus=false");
+            DalalStreetAPIService service = new DalalStreetAPIService("/Application/Stop");
             bool result = service.StopGame();
             service.DisposeClient();
             return result;
 
         }
+        public void resetGame()
+        {
+            StopGame();
+            DalalStreetAPIService service = new DalalStreetAPIService("/Application/Reset");
+            service.ResetGame();
+            service.DisposeClient();
+        }
+        #endregion
+        #region ADMIN
 
         public IEnumerable<SimpleString> GetCompanyName()
         {
@@ -164,7 +174,7 @@ namespace DalalStreetClient.Core.Controllers
         }
         public bool DeleteCompanyCategory(long id)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_NewCompanyCategory/" + id);
+            DalalStreetAPIService service = new DalalStreetAPIService("/DS_CompanyCategory/" + id);
             bool result = service.Delete();
             service.DisposeClient();
             return result;
@@ -188,7 +198,7 @@ namespace DalalStreetClient.Core.Controllers
         }
         public EventType CreateEventType(EventType eventType)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_NewCompanyNames");
+            DalalStreetAPIService service = new DalalStreetAPIService("/DS_EventTypes");
             EventType result = service.CreateEventType(eventType);
             service.DisposeClient();
             return result;
@@ -196,7 +206,7 @@ namespace DalalStreetClient.Core.Controllers
         }
         public EventType SaveEventType(EventType eventType)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_NewCompanyNames/" + eventType.Id);
+            DalalStreetAPIService service = new DalalStreetAPIService("/DS_EventTypes/" + eventType.Id);
             EventType result = service.SaveEventType(eventType);
             service.DisposeClient();
             return result;
@@ -210,9 +220,9 @@ namespace DalalStreetClient.Core.Controllers
             return result;
 
         }
-        public IEnumerable<Event> GetEvents()
+        public IEnumerable<Event> GetEvents(int quantity)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_NewsEvent/allrecords");
+            DalalStreetAPIService service = new DalalStreetAPIService("/DS_NewsEvent/allrecords/"+ quantity);
             IEnumerable<Event> result = service.GetEvents();
             service.DisposeClient();
             return result;
@@ -250,5 +260,58 @@ namespace DalalStreetClient.Core.Controllers
             return result;
 
         }
+#endregion
+        #region PLAYER
+        public Player AddPlayer(string name)
+        {
+            DalalStreetAPIService service = new DalalStreetAPIService("/DS_Player/addPlayer");
+            Player result = service.AddPlayer(name);
+            service.DisposeClient();
+            return result;
+
+        }
+        public Player GetPlayer(int id)
+        {
+            DalalStreetAPIService service = new DalalStreetAPIService("/DS_Player/getPlayer/" + id);
+            Player result = service.GetPlayer();
+            service.DisposeClient();
+            return result;
+
+        }
+
+        public Inventory GetPlayerInventory(int id, int company)
+        {
+            DalalStreetAPIService service = new DalalStreetAPIService("/DS_Player/playerInventory/" + id + "/" + company);
+            Inventory result = service.GetPlayerInventory();
+            service.DisposeClient();
+            return result;
+
+        }
+
+        public IEnumerable<Player> GetAllPlayers()
+        {
+            DalalStreetAPIService service = new DalalStreetAPIService("/DS_Player/allPlayers");
+            IEnumerable<Player> result = service.GetAllPlayers();
+            service.DisposeClient();
+            return result;
+
+        }
+        public bool BuyStock(int  playerId, int companyId, int stocks)
+        {
+            DalalStreetAPIService service = new DalalStreetAPIService("/DS_Player/buy");
+            bool result = service.BuyOrSell(playerId, companyId, stocks);
+            service.DisposeClient();
+            return result;
+
+        }
+        public bool SellStock(int playerId, int companyId, int stocks)
+        {
+            DalalStreetAPIService service = new DalalStreetAPIService("/DS_Player/sell");
+            bool result = service.BuyOrSell(playerId, companyId, stocks);
+            service.DisposeClient();
+            return result;
+
+        }
+        #endregion
     }
 }

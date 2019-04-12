@@ -13,6 +13,69 @@ namespace DalalStreetClient.Pages {
     public partial class GamePlayer {
         
         /// <summary>
+        /// tableStocks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tableStocks;
+        
+        /// <summary>
+        /// tableNews control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tableNews;
+        
+        /// <summary>
+        /// tableAction control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tableAction;
+        
+        /// <summary>
+        /// HiddenCompanyId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HiddenCompanyId;
+        
+        /// <summary>
+        /// quantityToPurchase control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl quantityToPurchase;
+        
+        /// <summary>
+        /// buttonBuy control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button buttonBuy;
+        
+        /// <summary>
+        /// buttonSell control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button buttonSell;
+        
+        /// <summary>
         /// ScriptManager control.
         /// </summary>
         /// <remarks>
@@ -40,21 +103,39 @@ namespace DalalStreetClient.Pages {
         protected global::System.Web.UI.UpdatePanel GamePanel;
         
         /// <summary>
-        /// tableStocks control.
+        /// StocksFromServer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tableStocks;
+        protected global::System.Web.UI.WebControls.HiddenField StocksFromServer;
         
         /// <summary>
-        /// tableNews control.
+        /// NewsFromServer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tableNews;
+        protected global::System.Web.UI.WebControls.HiddenField NewsFromServer;
+        
+        /// <summary>
+        /// UserInfoFromServer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField UserInfoFromServer;
+        
+        /// <summary>
+        /// PlayerBalance control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField PlayerBalance;
     }
 }

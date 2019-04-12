@@ -18,6 +18,8 @@ namespace DalalStreetClient
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            Simulation game = (Simulation)Application["Game"];
+
             string userName = "";
             HttpCookie userCookie;
             userCookie = Request.Cookies["UserID"];
@@ -46,29 +48,48 @@ namespace DalalStreetClient
                 if (c == null)
                 {
                     DoLogout();
+                    menu.Visible = false;
                     Response.Redirect("~/Login.aspx");
                 }
-                else if (!IsPrivateAccess(sender) && (Session["UserId"] == null))
+                else if (!IsPrivateAccess(sender) && (userCookie != null))
                 {
-
-                    ManageMenuVisibility(c.Value.ToString());
-                    //send the user to the first page if is a public
-                    if (c.Value == "Admin")
+                    if (game == null)
                     {
-                        Simulation game = (Simulation)Application["Game"];
-                        if (game == null)
+                        DoLogout();
+                        menu.Visible = false;
+                        return;
+                    } else
+                    {
+                        game.Running = Core.Controllers.DalalStreetAPIController.GetInstance().isGameRunning();
+                        ManageMenuVisibility(c.Value.ToString());
+                        //send the user to the first page if is a public
+                        if (c.Value == "Admin")
                         {
-                            DoLogout();
-                        }
-                        Response.Redirect("~/Pages/GameSettings.aspx");
-                    }
-                    else if (c.Value == "Player")
-                    {
-                        Response.Redirect("~/Pages/PlayerWaitingRoom.aspx");
                         
+                            if (game == null)
+                            {
+                                DoLogout();
+                                menu.Visible = false;
+                                return;
+                            }
+                            Response.Redirect("~/Pages/GameSettings.aspx");
+                        }
+                        else if (c.Value == "Player")
+                        {
+                            if (!game.ContainsPlayer(userCookie.Value) && game.Restarted)
+                            {
+                                DoLogout();
+                                menu.Visible = false;
+                                return;
+                            } else
+                            {
+                                Response.Redirect("~/Pages/PlayerWaitingRoom.aspx");
+                            }
+                        
+                        }
                     }
                 }
-
+                
                 Menu_userName.Text = userName;
                 string ip = Session["userIP"] != null ? Session["userIP"].ToString() : "";
                 Menu_userIP.Text = ip;
@@ -76,7 +97,9 @@ namespace DalalStreetClient
 
                 ManageMenuVisibility(c.Value.ToString());
 
-            }
+            }/*
+            Simulation game = (Simulation)Application["Game"];
+                        game.Running = Core.Controllers.DalalStreetAPIController.GetInstance().isGameRunning();*/
         }
 
         public void ManageMenuVisibility(string categoryCookie)
@@ -101,8 +124,8 @@ namespace DalalStreetClient
                     Menu_LinkMenuLogout.Visible = true;
                     Menu_LinkButtonGameSettings.Visible = false;
                     Menu_userName.Visible = true;
-                    Menu_userIP.Visible = true;
-                    Menu_gameTime.Visible = true;
+                    Menu_userIP.Visible = false;
+                    Menu_gameTime.Visible = false;
                     break;
             }
 
@@ -137,13 +160,14 @@ namespace DalalStreetClient
                 {
                     if (User.Category.Admin == User.ConvertCategory(role))
                     {
-                        Application.RemoveAll();
+                        //Application.RemoveAll();
+                        //Do not destroy game
                     } else
                     {
                         Simulation game = (Simulation)Application["Game"];
                         if (game != null)
                         {
-                            int index = 0;
+                            int index = -1;
                             foreach (User user in game.Players)
                             {
                                 String name = (String)Response.Cookies["UserName"].Value;
@@ -153,7 +177,10 @@ namespace DalalStreetClient
                                 }
                                 index++;
                             }
-                            game.Players.RemoveAt(index);
+                            if (index > -1)
+                            {
+                                game.Players.RemoveAt(index);
+                            }
                         }
 
                     }

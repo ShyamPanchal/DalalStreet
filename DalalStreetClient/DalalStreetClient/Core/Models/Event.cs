@@ -12,5 +12,10 @@ namespace DalalStreetClient.Core.Models
 
         public int EventTypeId { get; set; }
 
+        public string toJson()
+        {
+            return "{" + OnCompanyId + " " + EventTypeId + "}";
+        }
+
     }
 }

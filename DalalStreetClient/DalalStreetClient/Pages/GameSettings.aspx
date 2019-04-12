@@ -18,6 +18,9 @@
             <br/>
         </div>
 		<div id="tablesSettings" runat="server" CssClass="w3-center">
+            <div class="w3-center w3-row-padding w3-margin-top"> 
+			    <asp:Button ID="buttonReset" runat="server" OnClick="buttonReset_click" Text="Reset Data" CssClass="w3-button w3-red w3-padding w3-round" />                
+            </div>
             <div id="companyNames" runat="server" CssClass="w3-center">
                 <h3>New Company Name</h3>
                 <asp:table id="CompanyNameTable" runat="server" GridLines="Horizontal" HorizontalAlign="Center" Width="75%" CssClass="w3-table w3-centered w3-bordered w3-hoverable w3-text-black w3-white w3-round-large">
