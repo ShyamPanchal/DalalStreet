@@ -97,7 +97,7 @@ namespace DalalStreetAPI.Controllers
             {
                 return BadRequest();
             }
-            bool result = await _service.BuyStocks(obj);
+            bool result = await _service.SellStocks(obj);
             return new ObjectResult(result);
         }
 
@@ -116,9 +116,9 @@ namespace DalalStreetAPI.Controllers
         [HttpGet()]
         [Route("playerInventory/{playerId}/{companyId}")]
         [ProducesResponseType(typeof(IEnumerable<DS_PlayerInventory>), 200)]
-        public async Task<IEnumerable<DS_PlayerInventory>> GetPlayerCompanyInventoryAsync(int playerId, int companyId)
+        public async Task<DS_PlayerInventory> GetPlayerCompanyInventoryAsync(int playerId, int companyId)
         {
-            IEnumerable<DS_PlayerInventory> records = await _service.GetPlayerInventory(playerId);
+            DS_PlayerInventory records = await _service.GetPlayerInventory(playerId, companyId);
 
             return records;
         }
