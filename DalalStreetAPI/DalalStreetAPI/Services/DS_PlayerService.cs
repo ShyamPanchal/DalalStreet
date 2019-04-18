@@ -58,6 +58,11 @@ namespace DalalStreetAPI.Services
 
         public async Task<bool> SellStocks(TransactionModel obj)
         {
+            if(obj.TotalStocks <= 0)
+            {
+                return false;
+            }
+
             // get related components
             DS_Player player = await GetPlayer(obj.PlayerId);
             DS_Company company = _context.DS_Company.FirstOrDefault(c => c.Id == obj.CompanyId);
@@ -169,6 +174,11 @@ namespace DalalStreetAPI.Services
 
         public async Task<bool> BuyStocks(TransactionModel obj)
         {
+            if (obj.TotalStocks <= 0)
+            {
+                return false;
+            }
+
             // get related components
             DS_Player player = await GetPlayer(obj.PlayerId);
             DS_Company company = _context.DS_Company.FirstOrDefault(c => c.Id == obj.CompanyId);
@@ -322,6 +332,8 @@ namespace DalalStreetAPI.Services
             return Task.CompletedTask;
         }
 
+        #region Clear Data Functions
+
         public void RemoveAllInventory()
         {
             var dS_PlayerInventory = _context.DS_PlayerInventory.AsEnumerable();
@@ -401,5 +413,7 @@ namespace DalalStreetAPI.Services
             }
             _context.SaveChanges();
         }
+
+        #endregion
     }
 }
