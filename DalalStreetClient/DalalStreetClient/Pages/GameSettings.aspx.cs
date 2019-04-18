@@ -34,7 +34,8 @@ namespace DalalStreetClient.Pages
                 buttonReset.Enabled = !isRunning;
                 Simulation game = (Simulation)Application["Game"];
 
-                LoadCompanyNameTable();
+                //LoadCompanyNameTable();
+                companyNames.Visible = false;
                 LoadCompanyCategoryTable();
                 LoadCompanyTable();
                 LoadEventTypeTable();

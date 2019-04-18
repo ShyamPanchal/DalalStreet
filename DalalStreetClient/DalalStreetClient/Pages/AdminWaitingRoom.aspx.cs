@@ -52,7 +52,7 @@ namespace DalalStreetClient.Pages
         private void LoadTable()
         {
             Simulation game = (Simulation)Application["Game"];
-            
+            buttonStart.Enabled = game.Players.Count > 0;
 
             PlayersTable.Rows.Clear();
 
