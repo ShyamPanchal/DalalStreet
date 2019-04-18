@@ -40,6 +40,15 @@ namespace DalalStreetClient.Pages.Settings {
         protected global::System.Web.UI.WebControls.TextBox textboxTypeString;
         
         /// <summary>
+        /// CustomValidatorLikehood control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator CustomValidatorLikehood;
+        
+        /// <summary>
         /// RequiredFieldValidator1 control.
         /// </summary>
         /// <remarks>
@@ -58,6 +67,15 @@ namespace DalalStreetClient.Pages.Settings {
         protected global::System.Web.UI.WebControls.TextBox textboxLikelyhood;
         
         /// <summary>
+        /// CustomValidatorEffectOnSelf control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator CustomValidatorEffectOnSelf;
+        
+        /// <summary>
         /// RequiredFieldValidator2 control.
         /// </summary>
         /// <remarks>
@@ -74,6 +92,15 @@ namespace DalalStreetClient.Pages.Settings {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox textboxEffectOnSelf;
+        
+        /// <summary>
+        /// CustomValidatorEffectOnOthers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator CustomValidatorEffectOnOthers;
         
         /// <summary>
         /// RequiredFieldValidator3 control.

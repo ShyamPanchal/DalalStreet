@@ -12,27 +12,38 @@ namespace DalalStreetClient.Pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            buttonReset.Visible = false;
             if (Application["Game"] == null)
             {
                 (Master as MasterPage).DoLogout();
             } else
             {
-                String role = (String)Session["role"];
-                if (role != null)
+                int id = -1;
+                HttpCookie userCookie = Request.Cookies["UserID"];
+                try
                 {
-                    if (Core.Models.User.Category.Player == Core.Models.User.ConvertCategory(role))
-                    {
-                        buttonReset.Visible = false;
-                    }
+                    id = Int32.Parse(userCookie.Value);
+                    buttonReset.Visible = false;
                 }
-                LoadTable();
+                catch (NullReferenceException nre)
+                {
+                    //there is no id
+                    (Master as MasterPage).DoLogout();
+                }
+                catch (Exception ex)
+                {
+                    //is the admin
+                    buttonReset.Visible = true;
+                }
+                LoadTable(id);
             }
 
         }
 
-        private void LoadTable()
+        private void LoadTable(int id)
         {
             Simulation game = (Simulation)Application["Game"];
+            
             if (game == null)
             {
                 (Master as MasterPage).DoLogout();
@@ -56,6 +67,7 @@ namespace DalalStreetClient.Pages
             PlayersTable.Rows.Add(row0);
 
             IEnumerable<Player> players = Core.Controllers.DalalStreetAPIController.GetInstance().GetAllPlayers();
+            
 
             foreach (Player player in players)
             {
@@ -67,6 +79,10 @@ namespace DalalStreetClient.Pages
                 TableCell cell2 = new TableCell();
                 cell2.Text = "" + player.Score;
                 row.Cells.Add(cell2);
+                if (player.Id == id)
+                {
+                    row.BackColor = System.Drawing.Color.FromArgb(255, 202, 169, 169);
+                }
                 PlayersTable.Rows.Add(row);
             }
         }

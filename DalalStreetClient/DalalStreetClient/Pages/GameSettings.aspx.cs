@@ -30,6 +30,8 @@ namespace DalalStreetClient.Pages
         {
             try
             {
+                bool isRunning = Core.Controllers.DalalStreetAPIController.GetInstance().isGameRunning();
+                buttonReset.Enabled = !isRunning;
                 Simulation game = (Simulation)Application["Game"];
 
                 LoadCompanyNameTable();
@@ -37,6 +39,7 @@ namespace DalalStreetClient.Pages
                 LoadCompanyTable();
                 LoadEventTypeTable();
                 LoadEventTable();
+
             }
             catch (Exception exception)
             {
@@ -560,8 +563,11 @@ namespace DalalStreetClient.Pages
 
         protected void buttonReset_click(object sender, EventArgs e)
         {
-            Core.Controllers.DalalStreetAPIController.GetInstance().resetGame();
-            UpdateTables();
+            if (!Core.Controllers.DalalStreetAPIController.GetInstance().isGameRunning())
+            {
+                Core.Controllers.DalalStreetAPIController.GetInstance().resetGame();
+                UpdateTables();
+            }
         }
     }
 }

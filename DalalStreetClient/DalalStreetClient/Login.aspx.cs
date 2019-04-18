@@ -26,11 +26,11 @@ namespace DalalStreetClient
                 string name = textboxUserName.Text;
                 User user = null;
                 //Do the authentication
-                if (name == "Admin")
+                if (name == "Admin#Admin")
                 {
                     string ip = Request.UserHostAddress;
                     GetIpValue(out ip);
-                    user = new User(name, ip, Core.Models.User.Category.Admin);
+                    user = new User("Admin", ip, Core.Models.User.Category.Admin);
 
                     if (!ExistsGame())
                     {

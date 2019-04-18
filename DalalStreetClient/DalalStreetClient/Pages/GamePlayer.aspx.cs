@@ -95,6 +95,7 @@ namespace DalalStreetClient.Pages
                 Int32.Parse(userCookie.Value), 
                 Int32.Parse(HiddenCompanyId.Value),
                 Int32.Parse(quantityToPurchase.Value));
+            UpdateData();
         }
 
         public void SellStocks(object sender, EventArgs e)
@@ -104,6 +105,7 @@ namespace DalalStreetClient.Pages
                 Int32.Parse(userCookie.Value),
                 Int32.Parse(HiddenCompanyId.Value),
                 Int32.Parse(quantityToPurchase.Value));
+            UpdateData();
         }
     }
 }

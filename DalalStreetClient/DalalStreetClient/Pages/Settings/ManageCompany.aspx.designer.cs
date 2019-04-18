@@ -49,6 +49,15 @@ namespace DalalStreetClient.Pages.Settings {
         protected global::System.Web.UI.WebControls.DropDownList DropDownListCompanyCategory;
         
         /// <summary>
+        /// CustomValidatorTotalStock control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator CustomValidatorTotalStock;
+        
+        /// <summary>
         /// RequiredFieldValidator1 control.
         /// </summary>
         /// <remarks>
@@ -65,6 +74,15 @@ namespace DalalStreetClient.Pages.Settings {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox textboxTotalStock;
+        
+        /// <summary>
+        /// CustomValidatorStockValue control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator CustomValidatorStockValue;
         
         /// <summary>
         /// RequiredFieldValidator2 control.

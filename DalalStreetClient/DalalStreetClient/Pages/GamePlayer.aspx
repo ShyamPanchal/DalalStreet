@@ -308,7 +308,7 @@
            
                  </div> 
     <asp:ScriptManager ID="ScriptManager" runat="server" />
-        <asp:Timer ID="TimerToRefresh" OnTick="Timer_Tick" runat="server" Interval="5000"></asp:Timer>
+        <asp:Timer ID="TimerToRefresh" OnTick="Timer_Tick" runat="server" Interval="2000"></asp:Timer>
         <asp:UpdatePanel ID="GamePanel" runat="server" UpdateMode="Conditional">
             <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="TimerToRefresh" />

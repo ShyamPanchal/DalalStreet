@@ -8,7 +8,7 @@ namespace DalalStreetClient.Core.Services
 {
     public class DalalStreetAPIService
     {
-        public static string URL = "https://localhost:44364/api";
+        public static string URL = "https://dalalstreetapi20190415093152.azurewebsites.net/api";
         private string UrlParameters = "";
         
         private HttpClient client;
@@ -424,31 +424,20 @@ namespace DalalStreetClient.Core.Services
 
         public Inventory GetPlayerInventory()
         {
-            IEnumerable <Inventory> inventory = null;
+            Inventory inventory = null;
 
             HttpResponseMessage response = client.GetAsync(UrlParameters).Result;
             if (response.IsSuccessStatusCode)
             {
                 inventory =
-                    response.Content.ReadAsAsync<IEnumerable<Inventory>>().Result;
+                    response.Content.ReadAsAsync<Inventory>().Result;
             }
             else
             {
                 Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
             }
-
-            Inventory i = new Inventory();
-            try
-            {
-                foreach(Inventory inv in inventory)
-                {
-                    i = inv;
-                }
-            } catch (Exception e)
-            {
-                return i;
-            }
-            return i;
+            
+            return inventory;
         }
 
         public IEnumerable<Player> GetAllPlayers()

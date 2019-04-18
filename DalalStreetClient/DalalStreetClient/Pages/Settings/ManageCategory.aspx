@@ -8,7 +8,7 @@
             <div class="w3-center w3-row-padding w3-margin-top">
 			    <asp:RequiredFieldValidator ID="RequiredFieldValidatorName" ValidationGroup="Manage" runat="server" ErrorMessage="Required!" ControlToValidate="textboxName" ForeColor="Red"></asp:RequiredFieldValidator> 
 			    <asp:Label runat="server" CssClass="w3-half w3-medium w3-right-align">Name:</asp:Label>
-			    <asp:TextBox ID="textboxName" runat="server" Width="20%" ValidationGroup="Manage" CssClass="w3-left-align w3-half w3-input w3-border w3-round w3-medium"></asp:TextBox>
+			    <asp:TextBox ID="textboxName" runat="server" Width="20%" ValidationGroup="Manage" CssClass="w3-left-align w3-half w3-input w3-border w3-round w3-medium" MaxLength="50"></asp:TextBox>
 		    </div>
             <div class="w3-center w3-row-padding w3-margin-top">
 			    <asp:Button ID="buttonSave" runat="server" ValidationGroup="Manage" OnClick="buttonSave_Click" Text="Save" CssClass="w3-button w3-red w3-padding w3-round w3-center" />

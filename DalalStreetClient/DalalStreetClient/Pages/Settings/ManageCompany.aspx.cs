@@ -53,33 +53,72 @@ namespace DalalStreetClient.Pages.Settings
         }
         protected void buttonSave_Click(object sender, EventArgs e)
         {
-            if (HiddenFieldId.Value == null || HiddenFieldId.Value == "")
+            if (verifyNumber(textboxStockValue.Text) && verifyNumber(textboxTotalStock.Text))
             {
-                Company company = new Company();
-                company.Name = textboxName.Text;
-                company.CategoryId = Int16.Parse(DropDownListCompanyCategory.SelectedValue);
-                company.StockValues = Int32.Parse(textboxStockValue.Text);
-                company.TotalStocks = Int32.Parse(textboxTotalStock.Text);
-                Core.Controllers.DalalStreetAPIController.GetInstance().CreateCompany(company);
+
+                if (HiddenFieldId.Value == null || HiddenFieldId.Value == "")
+                {
+                    Company company = new Company();
+                    company.Name = textboxName.Text;
+                    company.CategoryId = Int16.Parse(DropDownListCompanyCategory.SelectedValue);
+                    company.StockValues = Int32.Parse(textboxStockValue.Text);
+                    company.TotalStocks = Int32.Parse(textboxTotalStock.Text);
+                    Core.Controllers.DalalStreetAPIController.GetInstance().CreateCompany(company);
+                }
+                else
+                {
+                    Company company = Core.Controllers.DalalStreetAPIController.GetInstance()
+                        .GetCompany(Int16.Parse(HiddenFieldId.Value));
+                    company.Name = textboxName.Text;
+                    company.CategoryId = Int16.Parse(DropDownListCompanyCategory.SelectedValue);
+                    company.StockValues = Int32.Parse(textboxStockValue.Text);
+                    company.TotalStocks = Int32.Parse(textboxTotalStock.Text);
+                    Core.Controllers.DalalStreetAPIController.GetInstance().SaveCompany(company);
+                }
+                Session["objId"] = null;
+                Response.Redirect("~/Pages/GameSettings.aspx");
             }
-            else
-            {
-                Company company = Core.Controllers.DalalStreetAPIController.GetInstance()
-                    .GetCompany(Int16.Parse(HiddenFieldId.Value));
-                company.Name = textboxName.Text;
-                company.CategoryId = Int16.Parse(DropDownListCompanyCategory.SelectedValue);
-                company.StockValues = Int32.Parse(textboxStockValue.Text);
-                company.TotalStocks = Int32.Parse(textboxTotalStock.Text);
-                Core.Controllers.DalalStreetAPIController.GetInstance().SaveCompany(company);
-            }
-            Session["objId"] = null;
-            Response.Redirect("~/Pages/GameSettings.aspx");
         }
 
         protected void buttonCancel_Click(object sender, EventArgs e)
         {
             Session["objId"] = null;
             Response.Redirect("~/Pages/GameSettings.aspx");
+        }
+
+        protected void validateTotalStock(object source, ServerValidateEventArgs args)
+        {
+            string number = textboxTotalStock.Text;
+            if (!verifyNumber(number))
+            {
+                args.IsValid = false;
+            }
+        }
+
+        protected void validateStockValue(object source, ServerValidateEventArgs args)
+        {
+            string number = textboxStockValue.Text;
+            if (!verifyNumber(number))
+            {
+                args.IsValid = false;
+            }
+        }
+
+        public bool verifyNumber(string number, int max = 100000000, int min = 0)
+        {
+            try
+            {
+                int value = Int32.Parse(number);
+                if (value > max || value < min)
+                {
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
     }
 }

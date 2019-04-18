@@ -8,21 +8,23 @@
             <div class="w3-center w3-row-padding ">
 			    <asp:RequiredFieldValidator ID="RequiredFieldValidatorName" ValidationGroup="Manage" runat="server" ErrorMessage="Required!" ControlToValidate="textboxName" ForeColor="Red"></asp:RequiredFieldValidator> 
 			    <asp:Label runat="server" CssClass="w3-half w3-medium w3-right-align">Name:</asp:Label>
-			    <asp:TextBox ID="textboxName" runat="server" Width="20%" ValidationGroup="Manage" CssClass="w3-left-align w3-half w3-input w3-border w3-round w3-medium"></asp:TextBox>
+			    <asp:TextBox ID="textboxName" runat="server" Width="20%" ValidationGroup="Manage" CssClass="w3-left-align w3-half w3-input w3-border w3-round w3-medium" MaxLength="50"></asp:TextBox>
 		    </div>
             <div class="w3-center w3-row-padding ">
 			    <asp:Label runat="server" CssClass="w3-half w3-medium w3-right-align">Category: &nbsp;</asp:Label>
 			    <asp:DropDownList DataValueField="Name" CssClass="w3-left-align w3-half w3-round w3-medium" ID="DropDownListCompanyCategory" Width="20%" runat="server"></asp:DropDownList>	
 		    </div>
             <div class="w3-center w3-row-padding ">
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ValidationGroup="Manage" runat="server" ErrorMessage="Required!" ControlToValidate="textboxTotalStock" ForeColor="Red"></asp:RequiredFieldValidator> 
+                <asp:CustomValidator ID="CustomValidatorTotalStock" ValidationGroup="Manage" runat="server" ErrorMessage="Must be a valid integer!" ControlToValidate="textboxTotalStock" ForeColor="Red" OnServerValidate="validateTotalStock" Display="Dynamic" ></asp:CustomValidator>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ValidationGroup="Manage" runat="server" ErrorMessage="Required!" ControlToValidate="textboxTotalStock" ForeColor="Red"></asp:RequiredFieldValidator>
 			    <asp:Label runat="server" CssClass="w3-half w3-medium w3-right-align">Total Stock:</asp:Label>
-			    <asp:TextBox ID="textboxTotalStock" runat="server" Width="20%" ValidationGroup="Manage" CssClass="w3-left-align w3-half w3-input w3-border w3-round w3-medium"></asp:TextBox>
+			    <asp:TextBox ID="textboxTotalStock" runat="server" Width="20%" ValidationGroup="Manage" CssClass="w3-left-align w3-half w3-input w3-border w3-round w3-medium" MaxLength="9"></asp:TextBox>
 		    </div>
-            <div class="w3-center w3-row-padding ">                
+            <div class="w3-center w3-row-padding ">   
+                <asp:CustomValidator ID="CustomValidatorStockValue" ValidationGroup="Manage" runat="server" ErrorMessage="Must be a valid integer!" ControlToValidate="textboxStockValue" ForeColor="Red" OnServerValidate="validateStockValue" Display="Dynamic" ></asp:CustomValidator>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ValidationGroup="Manage" runat="server" ErrorMessage="Required!" ControlToValidate="textboxStockValue" ForeColor="Red"></asp:RequiredFieldValidator>                 
 			    <asp:Label runat="server" CssClass="w3-half w3-medium w3-right-align">Stock Value:</asp:Label>
-			    <asp:TextBox ID="textboxStockValue" runat="server" ValidationGroup="Manage"  Width="20%" CssClass="w3-left-align w3-half w3-input w3-border w3-round w3-medium"></asp:TextBox>
+			    <asp:TextBox ID="textboxStockValue" runat="server" ValidationGroup="Manage"  Width="20%" CssClass="w3-left-align w3-half w3-input w3-border w3-round w3-medium" MaxLength="9"></asp:TextBox>
                 
 		    </div>
             <div class="w3-center w3-row-padding w3-margin-top">

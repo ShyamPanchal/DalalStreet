@@ -97,7 +97,9 @@
     <Content Include="Pages\Settings\ManageCompanyName.aspx" />
     <Content Include="Pages\Settings\ManageEvent.aspx" />
     <Content Include="Pages\Settings\ManageType.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Controllers\DalalStreetAPIController.cs" />
@@ -236,6 +238,7 @@
   <ItemGroup>
     <Content Include="MasterPage.Master" />
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\DalalStreet - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

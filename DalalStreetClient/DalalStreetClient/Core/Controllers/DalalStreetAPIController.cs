@@ -284,6 +284,13 @@ namespace DalalStreetClient.Core.Controllers
             DalalStreetAPIService service = new DalalStreetAPIService("/DS_Player/playerInventory/" + id + "/" + company);
             Inventory result = service.GetPlayerInventory();
             service.DisposeClient();
+            if (result == null)
+            {
+                result = new Inventory();
+                result.companyId = company;
+                result.playerId = id;
+                result.ownedStocks = 0;
+            }
             return result;
 
         }
