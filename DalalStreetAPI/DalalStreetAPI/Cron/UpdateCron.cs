@@ -102,13 +102,18 @@ namespace DalalStreetAPI.Cron
 
                 selectedCompany.stockValues = (int)((selectedEvent.EffectOnSelf * selectedCompany.stockValues) + selectedCompany.stockValues);
 
+                if(selectedCompany.stockValues < 1)
+                {
+                    selectedCompany.stockValues = 1;
+                }
+
                 foreach (var c in companiesInSameCategory)
                 {
                     int temp = c.stockValues;
                     c.stockValues = (int)((selectedEvent.EffectOnOthers * c.stockValues) + c.stockValues);
                     if(c.stockValues < 1)
                     {
-                        c.stockValues = temp;
+                        c.stockValues = 1;
                     }
                 }
 

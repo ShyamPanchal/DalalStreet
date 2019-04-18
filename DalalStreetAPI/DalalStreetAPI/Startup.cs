@@ -68,7 +68,7 @@ namespace DalalStreetAPI
             ServiceProvider provider = services.BuildServiceProvider();
 
             Registry updateFunction = new Registry();
-            updateFunction.Schedule(() => new UpdateCron(provider)).ToRunNow().AndEvery(2).Seconds();
+            updateFunction.Schedule(() => new UpdateCron(provider)).ToRunNow().AndEvery(10).Seconds();
 
             JobManager.UseUtcTime();
             JobManager.Initialize(updateFunction);

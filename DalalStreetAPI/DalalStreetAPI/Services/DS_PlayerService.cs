@@ -229,7 +229,14 @@ namespace DalalStreetAPI.Services
 
             #region Deduct Number of Stocks with Stock Value
 
-            company.stockValues = (int)newStockValue;
+            if(newStockValue == 0)
+            {
+                company.stockValues = 1;
+            }
+            else
+            {
+                company.stockValues = (int)newStockValue;
+            }
             company.totalStocks -= obj.TotalStocks;
 
             #endregion
