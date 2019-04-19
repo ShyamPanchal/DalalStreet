@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -10,7 +11,7 @@ namespace DalalStreetClient.Pages
 {
     public partial class ResultPage : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected async void Page_Load(object sender, EventArgs e)
         {
             buttonReset.Visible = false;
             if (Application["Game"] == null)
@@ -35,16 +36,16 @@ namespace DalalStreetClient.Pages
                     //is the admin
                     buttonReset.Visible = true;
                 }
-                LoadTable(id);
+                await LoadTable(id);
             }
 
         }
 
-        private void LoadTable(int id)
+        private async Task LoadTable(int id)
         {
             Simulation game = (Simulation)Application["Game"];
             
-            if (game == null)
+            if (game == null || game.Restarted)
             {
                 (Master as MasterPage).DoLogout();
             }
@@ -66,7 +67,7 @@ namespace DalalStreetClient.Pages
 
             PlayersTable.Rows.Add(row0);
 
-            IEnumerable<Player> players = Core.Controllers.DalalStreetAPIController.GetInstance().GetAllPlayers();
+            IEnumerable<Player> players = await Core.Controllers.DalalStreetAPIController.GetInstance().GetAllPlayers();
             
 
             foreach (Player player in players)
@@ -93,7 +94,8 @@ namespace DalalStreetClient.Pages
             Simulation game = (Simulation)Application["Game"];
             game.Players = new List<User>();
             game.Restarted = true;
-            Response.Redirect("~/Pages/GameSettings.aspx");
+            Response.Redirect("~/Pages/GameSettings.aspx", false);
+            Context.ApplicationInstance.CompleteRequest();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Waiting Room" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="PlayerWaitingRoom.aspx.cs" Inherits="DalalStreetClient.Pages.PlayerWaitingRoom" %>
+﻿<%@ Page Title="Waiting Room" Async="true" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="PlayerWaitingRoom.aspx.cs" Inherits="DalalStreetClient.Pages.PlayerWaitingRoom" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -8,7 +8,7 @@
 		<div id="tablePlayers" runat="server" CssClass="w3-center">
             <p>
                 <asp:ScriptManager ID="ScriptManager" runat="server" />
-                <asp:Timer ID="TimerToRefresh" OnTick="Timer_Tick" runat="server" Interval="5000"></asp:Timer>
+                <asp:Timer ID="TimerToRefresh" OnTick="Timer_Tick" runat="server" Interval="2000"></asp:Timer>
                 <asp:UpdatePanel ID="PlayerTablePanel" runat="server" UpdateMode="Conditional">
                     <Triggers>
                         <asp:AsyncPostBackTrigger ControlID="TimerToRefresh" />

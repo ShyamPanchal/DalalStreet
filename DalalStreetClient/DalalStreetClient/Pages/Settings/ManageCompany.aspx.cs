@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -10,7 +11,7 @@ namespace DalalStreetClient.Pages.Settings
 {
     public partial class ManageCompany : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected async void Page_Load(object sender, EventArgs e)
         {
             string idCategory = null;
             if (!IsPostBack)
@@ -21,14 +22,14 @@ namespace DalalStreetClient.Pages.Settings
                 }
                 else
                 {
-                    Company company = Core.Controllers.DalalStreetAPIController.GetInstance().GetCompany(Int16.Parse(Session["objId"].ToString()));
+                    Company company = await Core.Controllers.DalalStreetAPIController.GetInstance().GetCompany(Int16.Parse(Session["objId"].ToString()));
                     textboxName.Text = company.Name;
                     HiddenFieldId.Value = company.Id.ToString();
                     idCategory = company.CategoryId.ToString();
                     textboxStockValue.Text = company.StockValues.ToString();
                     textboxTotalStock.Text = company.TotalStocks.ToString();
                 }
-                IEnumerable<CompanyCategory> dataSource = Core.Controllers.DalalStreetAPIController.GetInstance()
+                IEnumerable<CompanyCategory> dataSource = await Core.Controllers.DalalStreetAPIController.GetInstance()
                     .GetCompanyCategories(); ;
 
                 int i = -1;
@@ -51,7 +52,7 @@ namespace DalalStreetClient.Pages.Settings
                 }
             }
         }
-        protected void buttonSave_Click(object sender, EventArgs e)
+        protected async void buttonSave_Click(object sender, EventArgs e)
         {
             if (verifyNumber(textboxStockValue.Text) && verifyNumber(textboxTotalStock.Text))
             {
@@ -67,7 +68,7 @@ namespace DalalStreetClient.Pages.Settings
                 }
                 else
                 {
-                    Company company = Core.Controllers.DalalStreetAPIController.GetInstance()
+                    Company company = await Core.Controllers.DalalStreetAPIController.GetInstance()
                         .GetCompany(Int16.Parse(HiddenFieldId.Value));
                     company.Name = textboxName.Text;
                     company.CategoryId = Int16.Parse(DropDownListCompanyCategory.SelectedValue);
@@ -76,14 +77,16 @@ namespace DalalStreetClient.Pages.Settings
                     Core.Controllers.DalalStreetAPIController.GetInstance().SaveCompany(company);
                 }
                 Session["objId"] = null;
-                Response.Redirect("~/Pages/GameSettings.aspx");
+                Response.Redirect("~/Pages/GameSettings.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
             }
         }
 
         protected void buttonCancel_Click(object sender, EventArgs e)
         {
             Session["objId"] = null;
-            Response.Redirect("~/Pages/GameSettings.aspx");
+            Response.Redirect("~/Pages/GameSettings.aspx", false);
+            Context.ApplicationInstance.CompleteRequest();
         }
 
         protected void validateTotalStock(object source, ServerValidateEventArgs args)

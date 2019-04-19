@@ -31,13 +31,13 @@
 			</div>
 		</div>
         <div id="menu" runat="server" class="w3-center w3-padding ">
-            <asp:LinkButton ID="Menu_LinkButtonAdminDashboard" runat="server" Text="Home" OnClick="Menu_Home" ValidationGroup="account" />
-            <asp:LinkButton ID="Menu_LinkButtonGameSettings" runat="server" Text="Settings" OnClick="Menu_Settings_Room" ValidationGroup="account" />
-            <asp:LinkButton ID="Menu_LinkWaitingRoom" runat="server" Text="Waiting Room" OnClick="Menu_Waiting_Room" ValidationGroup="account" />
-            <asp:Label id="Menu_userName" runat="server"></asp:Label>
-            <asp:Label id="Menu_userIP" runat="server"></asp:Label>
-            <asp:Label id="Menu_gameTime" runat="server"></asp:Label>
-            <asp:LinkButton ID="Menu_LinkMenuLogout" runat="server" Text="Logout" OnClick="Menu_Logout_Click" ValidationGroup="logout" />
+            <asp:LinkButton Visible="false" ID="Menu_LinkButtonAdminDashboard" runat="server" Text="Home" OnClick="Menu_Home" ValidationGroup="account" />
+            <asp:LinkButton Visible="false" ID="Menu_LinkButtonGameSettings" runat="server" Text="Settings" OnClick="Menu_Settings_Room" ValidationGroup="account" />
+            <asp:LinkButton Visible="false" ID="Menu_LinkWaitingRoom" runat="server" Text="Waiting Room" OnClick="Menu_Waiting_Room" ValidationGroup="account" />
+            <asp:Label Visible="false" id="Menu_userName" runat="server"></asp:Label>
+            <asp:Label Visible="false" id="Menu_userIP" runat="server"></asp:Label>
+            <asp:Label Visible="false" id="Menu_gameTime" runat="server"></asp:Label>
+            <asp:LinkButton Visible="false" ID="Menu_LinkMenuLogout" runat="server" Text="Logout" OnClick="Menu_Logout_Click" ValidationGroup="logout" />
         </div>
 		<div class="w3-bar w3-white w3-center w3-medium">
 			<asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -27,7 +28,8 @@ namespace DalalStreetClient
             {
                 if (IsPrivateAccess(sender))
                 {
-                    Response.Redirect("~/Login.aspx");
+                    Response.Redirect("~/Login.aspx", false);
+                    Context.ApplicationInstance.CompleteRequest();
                 }
                 menu.Visible = false;
 
@@ -49,7 +51,8 @@ namespace DalalStreetClient
                 {
                     DoLogout();
                     menu.Visible = false;
-                    Response.Redirect("~/Login.aspx");
+                    Response.Redirect("~/Login.aspx", false);
+                    Context.ApplicationInstance.CompleteRequest();
                 }
                 else if (!IsPrivateAccess(sender) && (userCookie != null))
                 {
@@ -60,7 +63,6 @@ namespace DalalStreetClient
                         return;
                     } else
                     {
-                        game.Running = Core.Controllers.DalalStreetAPIController.GetInstance().isGameRunning();
                         ManageMenuVisibility(c.Value.ToString());
                         //send the user to the first page if is a public
                         if (c.Value == "Admin")
@@ -72,7 +74,8 @@ namespace DalalStreetClient
                                 menu.Visible = false;
                                 return;
                             }
-                            Response.Redirect("~/Pages/GameSettings.aspx");
+                            Response.Redirect("~/Pages/GameSettings.aspx", false);
+                            Context.ApplicationInstance.CompleteRequest();
                         }
                         else if (c.Value == "Player")
                         {
@@ -83,7 +86,8 @@ namespace DalalStreetClient
                                 return;
                             } else
                             {
-                                Response.Redirect("~/Pages/PlayerWaitingRoom.aspx");
+                                Response.Redirect("~/Pages/PlayerWaitingRoom.aspx", false);
+                                Context.ApplicationInstance.CompleteRequest();
                             }
                         
                         }
@@ -133,20 +137,24 @@ namespace DalalStreetClient
 
         protected void Menu_Settings_Room(object sender, EventArgs e)
         {
-            Response.Redirect("~/Pages/GameSettings.aspx");
+            Response.Redirect("~/Pages/GameSettings.aspx", false);
+            Context.ApplicationInstance.CompleteRequest();
         }
         protected void Menu_Waiting_Room(object sender, EventArgs e)
         {
-            Response.Redirect("~/Pages/AdminWaitingRoom.aspx");
+            Response.Redirect("~/Pages/AdminWaitingRoom.aspx", false);
+            Context.ApplicationInstance.CompleteRequest();
         }
         protected void Menu_Home(object sender, EventArgs e)
         {
-            Response.Redirect("~/Pages/Dashboard/AdminDashboard.aspx");
+            Response.Redirect("~/Pages/Dashboard/AdminDashboard.aspx", false);
+            Context.ApplicationInstance.CompleteRequest();
         }
         protected void Menu_Logout_Click(object sender, EventArgs e)
         {
             DoLogout();
-            Response.Redirect("~/Login.aspx");
+            Response.Redirect("~/Login.aspx", false);
+            Context.ApplicationInstance.CompleteRequest();
         }
 
         public void DoLogout()

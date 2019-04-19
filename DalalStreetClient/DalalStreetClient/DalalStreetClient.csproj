@@ -239,6 +239,7 @@
     <Content Include="MasterPage.Master" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\DalalStreet - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\HiDalalStreet - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

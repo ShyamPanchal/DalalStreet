@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -10,7 +11,7 @@ namespace DalalStreetClient.Pages
 {
     public partial class AdminWaitingRoom : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected async void Page_Load(object sender, EventArgs e)
         {
             if (Application["Game"] == null)
             {
@@ -21,17 +22,19 @@ namespace DalalStreetClient.Pages
                 if (c1.Value == "Admin")
                 {
                     Simulation game = (Simulation)Application["Game"];
-                    if (game.Running)
+                    bool isGameRunning = await Core.Controllers.DalalStreetAPIController.GetInstance().isGameRunning();
+                    if (isGameRunning)
                     {
-                        Response.Redirect("~/Pages/GameAdmin.aspx");                        
+                        Response.Redirect("~/Pages/GameAdmin.aspx", false);
+                        Context.ApplicationInstance.CompleteRequest();
                     }
                 }                
 
-                LoadTable();
+                await LoadTable();
             }
         }
 
-        protected void Timer_Tick(object sender, EventArgs e)
+        protected async void Timer_Tick(object sender, EventArgs e)
         {
             if (Application["Game"] == null)
             {
@@ -44,15 +47,17 @@ namespace DalalStreetClient.Pages
                 times++;
                 Application["Times"] = times;
                 //Update_Times.Text = "" + times;
-                LoadTable();
+                await LoadTable();
 
             }            
         }
 
-        private void LoadTable()
+        private async Task LoadTable()
         {
             Simulation game = (Simulation)Application["Game"];
-            buttonStart.Enabled = game.Players.Count > 0;
+            IEnumerable<Player> players = await Core.Controllers.DalalStreetAPIController.GetInstance().GetAllPlayers();
+            buttonStart.Enabled = players.Count() > 0;
+             //= game.Players.Count > 0;
 
             PlayersTable.Rows.Clear();
 
@@ -69,9 +74,7 @@ namespace DalalStreetClient.Pages
             cell02.Font.Bold = true;
             row0.Cells.Add(cell02);
 
-            PlayersTable.Rows.Add(row0);
-
-            IEnumerable<Player> players = Core.Controllers.DalalStreetAPIController.GetInstance().GetAllPlayers();
+            PlayersTable.Rows.Add(row0);            
 
             foreach (Player user in players)
             {
@@ -87,14 +90,17 @@ namespace DalalStreetClient.Pages
             }
         }
 
-        protected void buttonStart_Click(object sender, EventArgs e)
+        protected async void buttonStart_Click(object sender, EventArgs e)
         {
-            Simulation game = (Simulation)Application["Game"];          
-            if (game.Players.Count > 0)
+            Simulation game = (Simulation)Application["Game"];
+            IEnumerable<Player> players = await Core.Controllers.DalalStreetAPIController.GetInstance().GetAllPlayers();
+            if (players.Count() > 0)
             {
+                game.Finished = false;
                 game.Running = Core.Controllers.DalalStreetAPIController.GetInstance().StartGame();
                 game.Restarted = false;
-                Response.Redirect("~/Pages/GameAdmin.aspx");
+                Response.Redirect("~/Pages/GameAdmin.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
             }
         }
     }

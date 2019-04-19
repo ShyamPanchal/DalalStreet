@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -10,7 +11,7 @@ namespace DalalStreetClient.Pages.Settings
 {
     public partial class ManageEvent : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected async void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
@@ -22,14 +23,14 @@ namespace DalalStreetClient.Pages.Settings
                 }
                 else
                 {
-                    Event _event = Core.Controllers.DalalStreetAPIController.GetInstance()
+                    Event _event = await Core.Controllers.DalalStreetAPIController.GetInstance()
                         .GetEvent(Int16.Parse(Session["objId"].ToString()));
                     HiddenFieldId.Value = _event.Id.ToString();
                     idEventType = _event.EventTypeId.ToString();
                     idCompany = _event.OnCompanyId.ToString();
 
                 }
-                IEnumerable<Company> dataSource = Core.Controllers.DalalStreetAPIController.GetInstance()
+                IEnumerable<Company> dataSource = await Core.Controllers.DalalStreetAPIController.GetInstance()
                     .GetCompanies(); ;
 
                 int i = -1;
@@ -52,7 +53,7 @@ namespace DalalStreetClient.Pages.Settings
                     DropDownListCompany.SelectedIndex = position;
                 }
 
-                IEnumerable<EventType> dataSource2 = Core.Controllers.DalalStreetAPIController.GetInstance()
+                IEnumerable<EventType> dataSource2 = await Core.Controllers.DalalStreetAPIController.GetInstance()
                     .GetEventTypes(); ;
 
                 i = -1;
@@ -77,7 +78,7 @@ namespace DalalStreetClient.Pages.Settings
 
             }
         }
-        protected void buttonSave_Click(object sender, EventArgs e)
+        protected async void buttonSave_Click(object sender, EventArgs e)
         {
             if (HiddenFieldId.Value == null || HiddenFieldId.Value == "")
             {
@@ -89,7 +90,7 @@ namespace DalalStreetClient.Pages.Settings
             }
             else
             {
-                Event _event = Core.Controllers.DalalStreetAPIController.GetInstance()
+                Event _event = await Core.Controllers.DalalStreetAPIController.GetInstance()
                     .GetEvent(Int16.Parse(HiddenFieldId.Value));
 
                 _event.OnCompanyId = Int16.Parse(DropDownListCompany.SelectedValue);
@@ -98,13 +99,15 @@ namespace DalalStreetClient.Pages.Settings
                 Core.Controllers.DalalStreetAPIController.GetInstance().SaveEvent(_event);
             }
             Session["objId"] = null;
-            Response.Redirect("~/Pages/GameSettings.aspx");
+            Response.Redirect("~/Pages/GameSettings.aspx", false);
+            Context.ApplicationInstance.CompleteRequest();
         }
 
         protected void buttonCancel_Click(object sender, EventArgs e)
         {
             Session["objId"] = null;
-            Response.Redirect("~/Pages/GameSettings.aspx");
+            Response.Redirect("~/Pages/GameSettings.aspx", false);
+            Context.ApplicationInstance.CompleteRequest();
         }
     }
 }

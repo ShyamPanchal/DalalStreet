@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -10,7 +11,7 @@ namespace DalalStreetClient.Pages
 {
     public partial class GameAdmin : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected async void Page_Load(object sender, EventArgs e)
         {
             if (Application["Game"] == null)
             {
@@ -19,23 +20,23 @@ namespace DalalStreetClient.Pages
             {
                 if (Request.Cookies["UserID"] != null)
                 {
-                    LoadTable();
+                    await LoadTable();
                 }
             }
         }
 
-        protected void Timer_Tick(object sender, EventArgs e)
+        protected async void Timer_Tick(object sender, EventArgs e)
         {
-            LoadTable();
+            await LoadTable();
         }
 
-        private void LoadTable()
+        private async Task LoadTable()
         {
-            Simulation game = (Simulation)Application["Game"];
-            if (game == null)
-            {
-                (Master as MasterPage).DoLogout();
-            }
+            IEnumerable<Player> players = await Core.Controllers.DalalStreetAPIController.GetInstance().GetAllPlayers();
+
+            bool isGameRunning = await Core.Controllers.DalalStreetAPIController.GetInstance().isGameRunning();
+
+            buttonStop.Enabled = isGameRunning;
 
             PlayersTable.Rows.Clear();
 
@@ -54,8 +55,6 @@ namespace DalalStreetClient.Pages
 
             PlayersTable.Rows.Add(row0);
 
-            IEnumerable<Player> players = Core.Controllers.DalalStreetAPIController.GetInstance().GetAllPlayers();
-
             foreach (Player player in players)
             {
                 TableRow row = new TableRow();
@@ -70,14 +69,20 @@ namespace DalalStreetClient.Pages
             }
         }
 
-        protected void buttonStop_Click(object sender, EventArgs e)
+        protected async void buttonStop_Click(object sender, EventArgs e)
         {
-            bool b = Core.Controllers.DalalStreetAPIController.GetInstance().StopGame();
-            Simulation game = (Simulation)Application["Game"];            
-            if (game != null)
+            bool isGameRunning = await Core.Controllers.DalalStreetAPIController.GetInstance().isGameRunning();
+            if (isGameRunning)
             {
-                game.Running = b;
-                Response.Redirect("~/Pages/ResultPage.aspx");
+                bool _false = Core.Controllers.DalalStreetAPIController.GetInstance().StopGame();
+                Simulation game = (Simulation)Application["Game"];            
+                if (game != null)
+                {
+                    game.Running = _false;
+                    game.Finished = true;
+                    Response.Redirect("~/Pages/ResultPage.aspx", false);
+                    Context.ApplicationInstance.CompleteRequest();
+                }
             }
         }
     }

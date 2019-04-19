@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="GamePlayer.aspx.cs" Inherits="DalalStreetClient.Pages.GamePlayer" %>
+﻿<%@ Page Title="" Async="true" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="GamePlayer.aspx.cs" Inherits="DalalStreetClient.Pages.GamePlayer" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
     table{
@@ -33,6 +33,8 @@
 	}
     #ContentPlaceHolder1_tableStocks{
         float: left;
+        max-height: 700px;
+        overflow-y: auto;
     }
     #ContentPlaceHolder1_tableNews{
         float: right;
@@ -159,6 +161,7 @@
         function BuildGameArea() {
             document.getElementById("ContentPlaceHolder1_tableStocks").innerHTML = "";
             var stockTable = document.createElement("table");
+            stockTable.id = "stocksTable";
             var row = stockTable.insertRow(0);
             var cell0 = row.insertCell(0);
             cell0.innerHTML = "Company";
@@ -170,6 +173,7 @@
             cell3.innerHTML = "Stock Owned";
             var cell4 = row.insertCell(4);
             cell4.innerHTML = "Action";
+            document.getElementById("ContentPlaceHolder1_tableStocks").appendChild(stockTable);
       
             var newStockData = GetStockData();
             document.getElementById("balance").innerHTML = newStockData.player.balance;
@@ -211,8 +215,7 @@
 
 
             }
-
-            document.getElementById("ContentPlaceHolder1_tableStocks").appendChild(stockTable);   
+               
             var newsTable = document.getElementById("newsTable");
             for(var i = newsTable.rows.length - 1; i > 5; i--)
             {
@@ -262,7 +265,7 @@
             document.getElementById("ContentPlaceHolder1_HiddenCompanyId").value = id;//currentData[companyName][currentData[companyName].length - 1];
             document.getElementById("currentCompany").innerHTML = companyName;
             document.getElementById("ownedStock").innerHTML = currentStockData.companies[companyName].StockOwned;
-            document.getElementById("stockValue").innerHTML = currentData[companyName][currentData[companyName].length - 2];
+            document.getElementById("stockValue").innerHTML = currentStockData.companies[companyName].StockValue;
         }
 
         function BuyStock() {
@@ -302,7 +305,7 @@
                            <div>Quantity: <input runat="server" type="number" id="quantityToPurchase" /></div>
                            <asp:Button ID="buttonBuy" UseSubmitBehavior="false" runat="server" CssClass="w3-button w3-red w3-padding w3-round" OnClick="BuyStocks" Text="Buy"/> 
                            <asp:Button ID="buttonSell" UseSubmitBehavior="false" runat="server" OnClick="SellStocks" CssClass="w3-button w3-red w3-padding w3-round" style="color:red" Text="Sell"/>
-                           <div id="message"></div>
+                           <div runat="server" visible="false" style="color:red" id="errorMessage">Try again!</div>
                        </div>
                      </div>
            

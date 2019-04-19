@@ -13,6 +13,15 @@ namespace DalalStreetClient.Pages {
     public partial class GamePlayer {
         
         /// <summary>
+        /// userMoney control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl userMoney;
+        
+        /// <summary>
         /// tableStocks control.
         /// </summary>
         /// <remarks>
@@ -74,6 +83,15 @@ namespace DalalStreetClient.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button buttonSell;
+        
+        /// <summary>
+        /// errorMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl errorMessage;
         
         /// <summary>
         /// ScriptManager control.

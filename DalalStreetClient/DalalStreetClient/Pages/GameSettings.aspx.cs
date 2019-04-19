@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -10,7 +11,7 @@ namespace DalalStreetClient.Pages
 {
     public partial class GameSettings : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected async void Page_Load(object sender, EventArgs e)
         {
 
             if (Application["Game"] == null)
@@ -22,24 +23,24 @@ namespace DalalStreetClient.Pages
             {
                 textboxAPUIrl.Text = Core.Services.DalalStreetAPIService.URL;
             }
-            UpdateTables();
+            await UpdateTables();
             
         }
 
-        private void UpdateTables ()
+        private async Task UpdateTables ()
         {
             try
             {
-                bool isRunning = Core.Controllers.DalalStreetAPIController.GetInstance().isGameRunning();
+                bool isRunning = await Core.Controllers.DalalStreetAPIController.GetInstance().isGameRunning();
                 buttonReset.Enabled = !isRunning;
                 Simulation game = (Simulation)Application["Game"];
 
                 //LoadCompanyNameTable();
                 companyNames.Visible = false;
-                LoadCompanyCategoryTable();
-                LoadCompanyTable();
-                LoadEventTypeTable();
-                LoadEventTable();
+                await LoadCompanyCategoryTable();
+                await LoadCompanyTable();
+                await LoadEventTypeTable();
+                await LoadEventTable();
 
             }
             catch (Exception exception)
@@ -48,7 +49,7 @@ namespace DalalStreetClient.Pages
             }
         }
 
-        private void LoadCompanyNameTable(bool isRunning = false)
+        private async Task LoadCompanyNameTable(bool isRunning = false)
         {
 
             CompanyNameTable.Rows.Clear();
@@ -73,7 +74,7 @@ namespace DalalStreetClient.Pages
 
             CompanyNameTable.Rows.Add(row0);
 
-            IEnumerable<SimpleString> companyNames = Core.Controllers.DalalStreetAPIController.GetInstance().GetCompanyName();
+            IEnumerable<SimpleString> companyNames = await Core.Controllers.DalalStreetAPIController.GetInstance().GetCompanyName();
             foreach (SimpleString name in companyNames)
             {
                 TableRow row = new TableRow();
@@ -101,11 +102,12 @@ namespace DalalStreetClient.Pages
                 buttonDelete.CommandArgument = name.Id.ToString();
                 buttonDelete.CssClass = "w3-button w3-red w3-padding w3-small w3-round";
                 buttonDelete.Attributes.Add("autopostback", "false");
-                buttonDelete.Click += (object sender, System.EventArgs args)=>
+                buttonDelete.Click += async (object sender, System.EventArgs args)=>
                 {
                     string id = ((Button)sender).CommandArgument;
                     Core.Controllers.DalalStreetAPIController.GetInstance().DeleteCompanyName(Int16.Parse(id));
-                    Response.Redirect("~/Pages/GameSettings.aspx");
+                    Response.Redirect("~/Pages/GameSettings.aspx", false);
+                    Context.ApplicationInstance.CompleteRequest();
                 };
                 cell6.Controls.Add(buttonDelete);
                 row.Cells.Add(cell6);
@@ -121,14 +123,15 @@ namespace DalalStreetClient.Pages
             buttonAdd.Attributes.Add("autopostback", "false");
             buttonAdd.Click += (object sender, System.EventArgs args) =>
             {
-                Response.Redirect("~/Pages/Settings/ManageCompanyName.aspx");
+                Response.Redirect("~/Pages/Settings/ManageCompanyName.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
             };
             cell.Controls.Add(buttonAdd);
             row0.Cells.Add(cell);
             CompanyNameTable.Rows.Add(newrow);
         }
 
-        private void LoadCompanyCategoryTable(bool isRunning = false)
+        private async Task LoadCompanyCategoryTable(bool isRunning = false)
         {
 
             CompanyCategoryTable.Rows.Clear();
@@ -153,7 +156,7 @@ namespace DalalStreetClient.Pages
 
             CompanyCategoryTable.Rows.Add(row0);
 
-            IEnumerable<CompanyCategory> companyCategories = Core.Controllers.DalalStreetAPIController.GetInstance().GetCompanyCategories();
+            IEnumerable<CompanyCategory> companyCategories = await Core.Controllers.DalalStreetAPIController.GetInstance().GetCompanyCategories();
             foreach (CompanyCategory category in companyCategories)
             {
                 TableRow row = new TableRow();
@@ -170,7 +173,8 @@ namespace DalalStreetClient.Pages
                 buttonEdit.Click += (object sender, System.EventArgs args) => {
                     string id = ((Button)sender).CommandArgument;
                     Session["objId"] = id;
-                    Response.Redirect("~/Pages/Settings/ManageCategory.aspx");
+                    Response.Redirect("~/Pages/Settings/ManageCategory.aspx", false);
+                    Context.ApplicationInstance.CompleteRequest();
                 };
                 cell5.Controls.Add(buttonEdit);
                 row.Cells.Add(cell5);
@@ -185,7 +189,8 @@ namespace DalalStreetClient.Pages
                 {
                     string id = ((Button)sender).CommandArgument;
                     Core.Controllers.DalalStreetAPIController.GetInstance().DeleteCompanyCategory(Int16.Parse(id));
-                    Response.Redirect("~/Pages/GameSettings.aspx");
+                    Response.Redirect("~/Pages/GameSettings.aspx", false);
+                    Context.ApplicationInstance.CompleteRequest();
                 };
                 cell6.Controls.Add(buttonDelete);
                 row.Cells.Add(cell6);
@@ -201,14 +206,15 @@ namespace DalalStreetClient.Pages
             buttonAdd.Attributes.Add("autopostback", "false");
             buttonAdd.Click += (object sender, System.EventArgs args) =>
             {
-                Response.Redirect("~/Pages/Settings/ManageCategory.aspx");
+                Response.Redirect("~/Pages/Settings/ManageCategory.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
             };
             cell.Controls.Add(buttonAdd);
             row0.Cells.Add(cell);
             CompanyNameTable.Rows.Add(newrow);
         }
 
-        private void LoadCompanyTable(bool isRunning = false)
+        private async Task LoadCompanyTable(bool isRunning = false)
         {
 
             CompanyTable.Rows.Clear();
@@ -248,7 +254,7 @@ namespace DalalStreetClient.Pages
 
             CompanyTable.Rows.Add(row0);
 
-            IEnumerable<Company> companies = Core.Controllers.DalalStreetAPIController.GetInstance().GetCompanies();
+            IEnumerable<Company> companies = await Core.Controllers.DalalStreetAPIController.GetInstance().GetCompanies();
             foreach (Company company in companies)
             {
                 TableRow row = new TableRow();
@@ -257,7 +263,7 @@ namespace DalalStreetClient.Pages
                 row.Cells.Add(cell1);
 
                 TableCell cell2 = new TableCell();
-                CompanyCategory category =  Core.Controllers.DalalStreetAPIController.GetInstance().GetCompanyCategory(company.CategoryId);
+                CompanyCategory category =  await Core.Controllers.DalalStreetAPIController.GetInstance().GetCompanyCategory(company.CategoryId);
                 cell2.Text = category.Name;
                 row.Cells.Add(cell2);
 
@@ -278,7 +284,8 @@ namespace DalalStreetClient.Pages
                 buttonEdit.Click += (object sender, System.EventArgs args) => {
                     string id = ((Button)sender).CommandArgument;
                     Session["objId"] = id;
-                    Response.Redirect("~/Pages/Settings/ManageCompany.aspx");
+                    Response.Redirect("~/Pages/Settings/ManageCompany.aspx", false);
+                    Context.ApplicationInstance.CompleteRequest();
                 };
                 cell5.Controls.Add(buttonEdit);
                 row.Cells.Add(cell5);
@@ -293,7 +300,8 @@ namespace DalalStreetClient.Pages
                 {
                     string id = ((Button)sender).CommandArgument;
                     Core.Controllers.DalalStreetAPIController.GetInstance().DeleteCompany(Int16.Parse(id));
-                    Response.Redirect("~/Pages/GameSettings.aspx");
+                    Response.Redirect("~/Pages/GameSettings.aspx", false);
+                    Context.ApplicationInstance.CompleteRequest();
                 };
                 cell6.Controls.Add(buttonDelete);
                 row.Cells.Add(cell6);
@@ -310,14 +318,15 @@ namespace DalalStreetClient.Pages
             buttonAdd.Attributes.Add("autopostback", "false");
             buttonAdd.Click += (object sender, System.EventArgs args) =>
             {
-                Response.Redirect("~/Pages/Settings/ManageCompany.aspx");
+                Response.Redirect("~/Pages/Settings/ManageCompany.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
             };
             cell.Controls.Add(buttonAdd);
             row0.Cells.Add(cell);
             CompanyNameTable.Rows.Add(newrow);
         }
 
-        private void LoadEventTypeTable(bool isRunning = false)
+        private async Task LoadEventTypeTable(bool isRunning = false)
         {
 
             EventTypeTable.Rows.Clear();
@@ -357,7 +366,7 @@ namespace DalalStreetClient.Pages
 
             EventTypeTable.Rows.Add(row0);
 
-            IEnumerable<EventType> eventTypes = Core.Controllers.DalalStreetAPIController.GetInstance().GetEventTypes();
+            IEnumerable<EventType> eventTypes = await Core.Controllers.DalalStreetAPIController.GetInstance().GetEventTypes();
             foreach (EventType type in eventTypes)
             {
                 TableRow row = new TableRow();
@@ -386,7 +395,8 @@ namespace DalalStreetClient.Pages
                 buttonEdit.Click += (object sender, System.EventArgs args) => {
                     string id = ((Button)sender).CommandArgument;
                     Session["objId"] = id;
-                    Response.Redirect("~/Pages/Settings/ManageType.aspx");
+                    Response.Redirect("~/Pages/Settings/ManageType.aspx", false);
+                    Context.ApplicationInstance.CompleteRequest();
                 };
                 cell5.Controls.Add(buttonEdit);
                 row.Cells.Add(cell5);
@@ -397,11 +407,12 @@ namespace DalalStreetClient.Pages
                 buttonDelete.CommandArgument = type.Id.ToString();
                 buttonDelete.CssClass = "w3-button w3-red w3-padding w3-small w3-round";
                 buttonDelete.Attributes.Add("autopostback", "false");
-                buttonDelete.Click += (object sender, System.EventArgs args) =>
+                buttonDelete.Click += async (object sender, System.EventArgs args) =>
                 {
                     string id = ((Button)sender).CommandArgument;
                     Core.Controllers.DalalStreetAPIController.GetInstance().DeleteEventType(Int16.Parse(id));
-                    Response.Redirect("~/Pages/GameSettings.aspx");
+                    Response.Redirect("~/Pages/GameSettings.aspx", false);
+                    Context.ApplicationInstance.CompleteRequest();
                 };
                 cell6.Controls.Add(buttonDelete);
                 row.Cells.Add(cell6);
@@ -416,13 +427,14 @@ namespace DalalStreetClient.Pages
             buttonAdd.Attributes.Add("autopostback", "false");
             buttonAdd.Click += (object sender, System.EventArgs args) =>
             {
-                Response.Redirect("~/Pages/Settings/Managetype.aspx");
+                Response.Redirect("~/Pages/Settings/Managetype.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
             };
             cell.Controls.Add(buttonAdd);
             row0.Cells.Add(cell);
             CompanyNameTable.Rows.Add(newrow);
         }
-        private void LoadEventTable(bool isRunning = false)
+        private async Task LoadEventTable(bool isRunning = false)
         {
 
             NewsEventsTable.Rows.Clear();
@@ -456,18 +468,18 @@ namespace DalalStreetClient.Pages
 
             if (!isRunning)
             {
-                events = Core.Controllers.DalalStreetAPIController.GetInstance().GetEvents(10);
+                events = await Core.Controllers.DalalStreetAPIController.GetInstance().GetEvents(10);
             }
             foreach (Event enews in events)
             {
                 TableRow row = new TableRow();
                 TableCell cell1 = new TableCell();
-                Company company= Core.Controllers.DalalStreetAPIController.GetInstance().GetCompany(enews.OnCompanyId);
+                Company company= await Core.Controllers.DalalStreetAPIController.GetInstance().GetCompany(enews.OnCompanyId);
                 cell1.Text = company.Name;
                 row.Cells.Add(cell1);
 
                 TableCell cell2 = new TableCell();
-                EventType type = Core.Controllers.DalalStreetAPIController.GetInstance().GetEventType(enews.EventTypeId);
+                EventType type = await Core.Controllers.DalalStreetAPIController.GetInstance().GetEventType(enews.EventTypeId);
                 cell2.Text = type.TypeString;
                 row.Cells.Add(cell2);
                 NewsEventsTable.Rows.Add(row);
@@ -481,7 +493,8 @@ namespace DalalStreetClient.Pages
                 buttonEdit.Click += (object sender, System.EventArgs args) => {
                     string id = ((Button)sender).CommandArgument;
                     Session["objId"] = id;
-                    Response.Redirect("~/Pages/Settings/ManageEvent.aspx");
+                    Response.Redirect("~/Pages/Settings/ManageEvent.aspx", false);
+                    Context.ApplicationInstance.CompleteRequest();
                 };
                 cell5.Controls.Add(buttonEdit);
                 row.Cells.Add(cell5);
@@ -492,11 +505,12 @@ namespace DalalStreetClient.Pages
                 buttonDelete.CommandArgument = enews.Id.ToString();
                 buttonDelete.CssClass = "w3-button w3-red w3-padding w3-small w3-round";
                 buttonDelete.Attributes.Add("autopostback", "false");
-                buttonDelete.Click += (object sender, System.EventArgs args) =>
+                buttonDelete.Click += async (object sender, System.EventArgs args) =>
                 {
                     string id = ((Button)sender).CommandArgument;
                     Core.Controllers.DalalStreetAPIController.GetInstance().DeleteEvent(Int16.Parse(id));
-                    Response.Redirect("~/Pages/GameSettings.aspx");
+                    Response.Redirect("~/Pages/GameSettings.aspx", false);
+                    Context.ApplicationInstance.CompleteRequest();
                 };
                 cell6.Controls.Add(buttonDelete);
                 row.Cells.Add(cell6);
@@ -510,35 +524,36 @@ namespace DalalStreetClient.Pages
             buttonAdd.Attributes.Add("autopostback", "false");
             buttonAdd.Click += (object sender, System.EventArgs args) =>
             {
-                Response.Redirect("~/Pages/Settings/ManageEvent.aspx");
+                Response.Redirect("~/Pages/Settings/ManageEvent.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
             };
             cell.Controls.Add(buttonAdd);
             row0.Cells.Add(cell);
             CompanyNameTable.Rows.Add(newrow);
         }
 
-        protected void buttonCheckAPI_Click(object sender, EventArgs e)
+        protected async void buttonCheckAPI_Click(object sender, EventArgs e)
         {
             string url = Core.Services.DalalStreetAPIService.URL;
             Core.Services.DalalStreetAPIService.URL = textboxAPUIrl.Text;
-            VerifyURL();
+            await VerifyURL();
             Core.Services.DalalStreetAPIService.URL = url;
         }
 
-        protected void VerifyAPI(object source, ServerValidateEventArgs args)
+        protected async void VerifyAPI(object source, ServerValidateEventArgs args)
         {
             Core.Services.DalalStreetAPIService.URL = textboxAPUIrl.Text;
-            if (!VerifyURL())
+            if (! await VerifyURL())
             {
                 args.IsValid = false;
             }
         }
 
-        private bool VerifyURL()
+        private async Task<bool> VerifyURL()
         {
             try
             {
-                Core.Controllers.DalalStreetAPIController.GetInstance().isGameRunning();
+                await Core.Controllers.DalalStreetAPIController.GetInstance().isGameRunning();
                 return true;
             } catch(Exception e)
             {
@@ -547,10 +562,10 @@ namespace DalalStreetClient.Pages
             }
         }
 
-        protected void VerifyAPIWorking(object source, ServerValidateEventArgs args)
+        protected async void VerifyAPIWorking(object source, ServerValidateEventArgs args)
         {
             Core.Services.DalalStreetAPIService.URL = textboxAPUIrl.Text;
-            if (VerifyURL())
+            if (await VerifyURL())
             {
                 //using to message working
                 args.IsValid = false;
@@ -562,12 +577,12 @@ namespace DalalStreetClient.Pages
             Core.Services.DalalStreetAPIService.URL = textboxAPUIrl.Text;
         }
 
-        protected void buttonReset_click(object sender, EventArgs e)
+        protected async void buttonReset_click(object sender, EventArgs e)
         {
-            if (!Core.Controllers.DalalStreetAPIController.GetInstance().isGameRunning())
+            if (!await Core.Controllers.DalalStreetAPIController.GetInstance().isGameRunning())
             {
                 Core.Controllers.DalalStreetAPIController.GetInstance().resetGame();
-                UpdateTables();
+                await UpdateTables();
             }
         }
     }

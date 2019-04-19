@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -10,7 +11,7 @@ namespace DalalStreetClient.Pages
 {
     public partial class PlayerWaitingRoom : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected async void Page_Load(object sender, EventArgs e)
         {
             if (Application["Game"]==null)
             {
@@ -25,12 +26,14 @@ namespace DalalStreetClient.Pages
 
                 
                 Simulation game = (Simulation)Application["Game"];
-                if (game.Running)
+                bool isGameRunning = await Core.Controllers.DalalStreetAPIController.GetInstance().isGameRunning();
+                if (isGameRunning)
                 {
-                    Response.Redirect("~/Pages/GamePlayer.aspx");
+                    Response.Redirect("~/Pages/GamePlayer.aspx", false);
+                    Context.ApplicationInstance.CompleteRequest();
                 }
 
-                LoadTable();
+                await LoadTable();
 
             }
             /*
@@ -40,21 +43,28 @@ namespace DalalStreetClient.Pages
             }*/
         }
 
-        protected void Timer_Tick(object sender, EventArgs e)
+        protected async void Timer_Tick(object sender, EventArgs e)
         {
-            LoadTable();
+            await LoadTable();
         }
 
-        private void LoadTable()
+        private async Task LoadTable()
         {
+            bool isGameRunning = await Core.Controllers.DalalStreetAPIController.GetInstance().isGameRunning();
             Simulation game = (Simulation)Application["Game"];
+
             if (game == null)
             {
                 (Master as MasterPage).DoLogout();
                 return;
-            } else if (game.Running)
+            } else if (isGameRunning)
             {
-                Response.Redirect("~/Pages/GamePlayer.aspx");
+                Response.Redirect("~/Pages/GamePlayer.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
+            } else if (game.Finished)
+            {
+                Response.Redirect("~/Pages/ResultPage.aspx", false);
+                Context.ApplicationInstance.CompleteRequest();
             }
 
             PlayersTable.Rows.Clear();
@@ -75,7 +85,7 @@ namespace DalalStreetClient.Pages
 
             PlayersTable.Rows.Add(row0);
 
-            IEnumerable<Player> players = Core.Controllers.DalalStreetAPIController.GetInstance().GetAllPlayers();
+            IEnumerable<Player> players = await Core.Controllers.DalalStreetAPIController.GetInstance().GetAllPlayers();
 
             foreach (Player user in players)
             {

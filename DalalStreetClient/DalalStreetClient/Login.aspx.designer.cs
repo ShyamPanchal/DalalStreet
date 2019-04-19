@@ -13,6 +13,42 @@ namespace DalalStreetClient {
     public partial class Login {
         
         /// <summary>
+        /// errorGameRunning control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl errorGameRunning;
+        
+        /// <summary>
+        /// errorUserDuplicated control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl errorUserDuplicated;
+        
+        /// <summary>
+        /// errorThereIsNoGame control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl errorThereIsNoGame;
+        
+        /// <summary>
+        /// CustomValidatorGameRunning control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator CustomValidatorGameRunning;
+        
+        /// <summary>
         /// CustomValidatorDuplicated control.
         /// </summary>
         /// <remarks>

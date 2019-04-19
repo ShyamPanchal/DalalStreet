@@ -13,6 +13,8 @@ namespace DalalStreetClient.Core.Models
 
         public bool Running { get; set; }
 
+        public bool Finished { get; set; }
+
         public bool Restarted { get; set; }
 
         public Simulation(User Owner)

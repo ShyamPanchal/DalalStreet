@@ -3,6 +3,7 @@ using DalalStreetClient.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using static DalalStreetClient.Core.Services.DalalStreetAPIService;
 
@@ -21,11 +22,11 @@ namespace DalalStreetClient.Core.Controllers
             return Controller;
         }
 
-        public bool isGameRunning()
+        public async Task<bool> isGameRunning()
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/Application/getgamestart");
-            bool result = service.isGameRunning();
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            bool result = await service.isGameRunning("/Application/getgamestart");
+            
             return result;
 
         }
@@ -33,257 +34,284 @@ namespace DalalStreetClient.Core.Controllers
         #region GAME
         public bool StartGame()
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/Application/Start");
-            bool result = service.StartGame();
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            bool result = service.StartGame("/Application/Start");
+            
             return result;
 
         }
 
         public bool StopGame()
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/Application/Stop");
-            bool result = service.StopGame();
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            bool result = service.StopGame("/Application/Stop");
+            
             return result;
 
         }
         public void resetGame()
         {
             StopGame();
-            DalalStreetAPIService service = new DalalStreetAPIService("/Application/Reset");
-            service.ResetGame();
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            service.ResetGame("/Application/Reset");
+            //
         }
         #endregion
         #region ADMIN
 
-        public IEnumerable<SimpleString> GetCompanyName()
+        public async Task<IEnumerable<SimpleString>> GetCompanyName()
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_NewCompanyNames/allrecords");
-            IEnumerable<SimpleString> result = service.GetCompanyNames();
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            IEnumerable<SimpleString> result = await service.GetCompanyNames("/DS_NewCompanyNames/allrecords");
+            //
             return result;
 
         }
 
-        public SimpleString GetCompanyName(long id)
+        public async Task<SimpleString> GetCompanyName(long id)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_NewCompanyNames/" + id);
-            SimpleString result = service.GetCompanyName();
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            
+            SimpleString result = await service.GetCompanyName("/DS_NewCompanyNames/" + id);
+            
             return result;
 
         }
         public SimpleString CreateCompanyName(SimpleString name)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_NewCompanyNames");
-            SimpleString result = service.CreateCompanyName(name);
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            
+            SimpleString result = service.CreateCompanyName(name, "/DS_NewCompanyNames");
+            
             return result;
 
         }
         public SimpleString SaveCompanyName(SimpleString name)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_NewCompanyNames/" + name.Id);
-            SimpleString result = service.SaveCompanyName(name);
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            
+            SimpleString result = service.SaveCompanyName(name, "/DS_NewCompanyNames/" + name.Id);
+            
             return result;
 
         }
         public bool DeleteCompanyName(long id)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_NewCompanyNames/" + id);
-            bool result = service.Delete();
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            
+            bool result = service.Delete("/DS_NewCompanyNames/" + id);
+            
             return result;
 
         }
-        public IEnumerable<Company> GetCompanies()
+        public async Task<IEnumerable<Company>> GetCompanies()
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_Company/allrecords");
-            IEnumerable<Company> result = service.GetCompanies();
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            
+            IEnumerable<Company> result = await service.GetCompanies("/DS_Company/allrecords");
+            
             return result;
 
         }
 
-        public Company GetCompany(long id)
+        public async Task<Company> GetCompany(long id)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_Company/" + id);
-            Company result = service.GetCompany();
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            
+            Company result = await service.GetCompany("/DS_Company/" + id);
+            
             return result;
 
         }
         public Company CreateCompany(Company company)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_Company");
-            Company result = service.CreateCompany(company);
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            
+            Company result = service.CreateCompany(company, "/DS_Company");
+            
             return result;
 
         }
         public Company SaveCompany(Company company)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_Company/" + company.Id);
-            Company result = service.SaveCompany(company);
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            
+            Company result = service.SaveCompany(company, "/DS_Company/" + company.Id);
+            
             return result;
 
         }
         public bool DeleteCompany(long id)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_Company/" + id);
-            bool result = service.Delete();
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            
+            bool result = service.Delete("/DS_Company/" + id);
+            
             return result;
 
         }
-        public IEnumerable<CompanyCategory> GetCompanyCategories()
+        public async Task<IEnumerable<CompanyCategory>> GetCompanyCategories()
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_CompanyCategory/allrecords");
-            IEnumerable<CompanyCategory> result = service.GetCompanyCategories();
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            
+            IEnumerable<CompanyCategory> result = await service.GetCompanyCategories("/DS_CompanyCategory/allrecords");
+            
             return result;
 
         }
-        public CompanyCategory GetCompanyCategory(long id)
+        public async Task<CompanyCategory> GetCompanyCategory(long id)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_CompanyCategory/" + id);
-            CompanyCategory result = service.GetCompanyCategory();
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            
+            CompanyCategory result = await service.GetCompanyCategory("/DS_CompanyCategory/" + id);
+            
             return result;
 
         }
         public CompanyCategory CreateCompanyCategory(CompanyCategory category)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_CompanyCategory");
-            CompanyCategory result = service.CreateCompanyCategory(category);
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            
+            CompanyCategory result = service.CreateCompanyCategory(category, "/DS_CompanyCategory");
+            
             return result;
 
         }
         public CompanyCategory SaveCompanyCategory(CompanyCategory category)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_CompanyCategory/" + category.Id);
-            CompanyCategory result = service.SaveCompanyCategory(category);
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            
+            CompanyCategory result = service.SaveCompanyCategory(category, "/DS_CompanyCategory/" + category.Id);
+            
             return result;
 
         }
         public bool DeleteCompanyCategory(long id)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_CompanyCategory/" + id);
-            bool result = service.Delete();
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            
+            bool result = service.Delete("/DS_CompanyCategory/" + id);
+            
             return result;
 
         }
-        public IEnumerable<EventType> GetEventTypes()
+        public async Task<IEnumerable<EventType>> GetEventTypes()
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_EventTypes/allrecords");
-            IEnumerable<EventType> result = service.GetEventTypes();
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            
+            IEnumerable<EventType> result = await service.GetEventTypes("/DS_EventTypes/allrecords");
+            
             return result;
 
         }
-        public EventType GetEventType(long id)
+        public async Task<EventType> GetEventType(long id)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_EventTypes/" + id);
-            EventType result = service.GetEventType();
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            
+            EventType result = await service.GetEventType("/DS_EventTypes/" + id);
+            
             return result;
 
         }
         public EventType CreateEventType(EventType eventType)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_EventTypes");
-            EventType result = service.CreateEventType(eventType);
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            
+            EventType result = service.CreateEventType(eventType, "/DS_EventTypes");
+            
             return result;
 
         }
         public EventType SaveEventType(EventType eventType)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_EventTypes/" + eventType.Id);
-            EventType result = service.SaveEventType(eventType);
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            
+            EventType result = service.SaveEventType(eventType, "/DS_EventTypes/" + eventType.Id);
+            
             return result;
 
         }
         public bool DeleteEventType(long id)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_EventTypes/" + id);
-            bool result = service.Delete();
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            
+            bool result = service.Delete("/DS_EventTypes/" + id);
+            
             return result;
 
         }
-        public IEnumerable<Event> GetEvents(int quantity)
+        public async Task<IEnumerable<Event>> GetEvents(int quantity)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_NewsEvent/allrecords/"+ quantity);
-            IEnumerable<Event> result = service.GetEvents();
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            
+            IEnumerable<Event> result = await service.GetEvents("/DS_NewsEvent/allrecords/" + quantity);
+            
             return result;
 
         }
-        public Event GetEvent(long id)
+        public async Task<Event> GetEvent(long id)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_NewsEvent/" + id);
-            Event result = service.GetEvent();
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            
+            Event result = await service.GetEvent("/DS_NewsEvent/" + id);
+            
             return result;
 
         }
         public Event CreateEvent(Event _event)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_NewsEvent");
-            Event result = service.CreateEvent(_event);
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+
+            Event result = service.CreateEvent(_event, "/DS_NewsEvent");
+            
             return result;
 
         }
         public Event SaveEvent(Event _event)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_NewsEvent/" + _event.Id);
-            Event result = service.SaveEvent(_event);
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            
+            Event result = service.SaveEvent(_event, "/DS_NewsEvent/" + _event.Id);
+            
             return result;
 
         }
         public bool DeleteEvent(long id)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_NewsEvent/" + id);
-            bool result = service.Delete();
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            
+            bool result = service.Delete("/DS_NewsEvent/" + id);
+            
             return result;
 
         }
 #endregion
         #region PLAYER
-        public Player AddPlayer(string name)
+        public async Task<Player> AddPlayer(string name)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_Player/addPlayer");
-            Player result = service.AddPlayer(name);
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            
+            Player result = await service.AddPlayer(name, "/DS_Player/addPlayer");
+            
             return result;
 
         }
-        public Player GetPlayer(int id)
+        public async Task<Player> GetPlayer(int id)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_Player/getPlayer/" + id);
-            Player result = service.GetPlayer();
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            
+            Player result = await service.GetPlayer("/DS_Player/getPlayer/" + id);
+            
             return result;
 
         }
 
-        public Inventory GetPlayerInventory(int id, int company)
+        public async Task<Inventory> GetPlayerInventory(int id, int company)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_Player/playerInventory/" + id + "/" + company);
-            Inventory result = service.GetPlayerInventory();
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            
+            Inventory result = await service.GetPlayerInventory("/DS_Player/playerInventory/" + id + "/" + company);
+            
             if (result == null)
             {
                 result = new Inventory();
@@ -295,27 +323,30 @@ namespace DalalStreetClient.Core.Controllers
 
         }
 
-        public IEnumerable<Player> GetAllPlayers()
+        public async Task<IEnumerable<Player>> GetAllPlayers()
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_Player/allPlayers");
-            IEnumerable<Player> result = service.GetAllPlayers();
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            
+            IEnumerable<Player> result = await service.GetAllPlayers("/DS_Player/allPlayers");
+            
             return result;
 
         }
-        public bool BuyStock(int  playerId, int companyId, int stocks)
+        public async Task<bool> BuyStock(int  playerId, int companyId, int stocks)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_Player/buy");
-            bool result = service.BuyOrSell(playerId, companyId, stocks);
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            
+            bool result = await service.BuyOrSell(playerId, companyId, stocks, "/DS_Player/buy");
+            
             return result;
 
         }
-        public bool SellStock(int playerId, int companyId, int stocks)
+        public async Task<bool> SellStock(int playerId, int companyId, int stocks)
         {
-            DalalStreetAPIService service = new DalalStreetAPIService("/DS_Player/sell");
-            bool result = service.BuyOrSell(playerId, companyId, stocks);
-            service.DisposeClient();
+            DalalStreetAPIService service = DalalStreetAPIService.GetInstance();
+            
+            bool result = await service.BuyOrSell(playerId, companyId, stocks, "/DS_Player/sell");
+            
             return result;
 
         }
